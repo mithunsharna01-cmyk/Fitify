@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fitify — Exercise Library</title>
+<style>
+:root{--bg:#0b0d10;--card:#151922;--card2:#1c2230;--text:#f5f7fa;--muted:#9ca6b5;--accent:#65e35d;--line:#282f3d}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{position:sticky;top:0;z-index:5;background:rgba(11,13,16,.95);border-bottom:1px solid var(--line)}
+nav{max-width:1100px;margin:auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:25px;font-weight:800}.logo span{color:var(--accent)}
+nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-size:14px}
+main{max-width:1100px;margin:auto;padding:24px 18px 60px}
+.hero{padding:34px 0 22px}.hero h1{font-size:clamp(34px,7vw,60px);margin:0 0 10px}.hero p{color:var(--muted);max-width:620px;line-height:1.6}
+.search{display:flex;gap:10px;margin:24px 0}.search input{flex:1;padding:15px 16px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:white;font-size:16px}
+button{border:0;border-radius:11px;padding:12px 16px;background:var(--accent);font-weight:700;cursor:pointer}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:30px 0 14px}.section-title h2{margin:0}
+.muscles,.exercises{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
+.muscle{background:var(--card);border:1px solid var(--line);padding:20px 15px;border-radius:15px;cursor:pointer}.muscle:hover{border-color:var(--accent)}
+.muscle b{display:block;margin-bottom:5px}.muscle small{color:var(--muted)}
+.exercise{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:17px}.exercise h3{margin:0 0 8px}.tag{display:inline-block;background:var(--card2);color:var(--muted);padding:5px 8px;border-radius:8px;font-size:12px;margin:3px 3px 10px 0}.exercise p{color:var(--muted);font-size:14px;line-height:1.5}.actions{display:flex;gap:8px}.fav{background:var(--card2);color:white}
+footer{text-align:center;color:var(--muted);border-top:1px solid var(--line);padding:25px}
+@media(max-width:600px){nav a{display:none}.search{flex-direction:column}.search button{width:100%}}
+</style>
+</head>
+<body>
+<header><nav><div class="logo">Fit<span>ify</span></div><div><a href="#exercises">Exercises</a><a href="#workout">Workout</a></div></nav></header>
+<main>
+<section class="hero">
+<h1>Train smarter.<br><span style="color:var(--accent)">Get stronger.</span></h1>
+<p>Explore exercises by muscle group, equipment and difficulty. Build your workout with Fitify.</p>
+<div class="search"><input id="search" placeholder="Search exercises, e.g. bench press"><button onclick="filterExercises()">Search</button></div>
+</section>
+
+<section>
+<div class="section-title"><h2>Muscle Groups</h2></div>
+<div class="muscles" id="muscles"></div>
+</section>
+
+<section id="exercises">
+<div class="section-title"><h2>Exercise Library</h2><button onclick="showAll()">All</button></div>
+<div class="exercises" id="exerciseList"></div>
+</section>
+
+<section id="workout">
+<div class="section-title"><h2>My Workout</h2><button onclick="clearWorkout()">Clear</button></div>
+<div id="workoutList" class="exercises"></div>
+</section>
+</main>
+<footer>© 2026 Fitify • Your original exercise & workout companion</footer>
+
+<script>
+const exercises=[
+{name:"Bench Press",muscle:"Chest",equipment:"Barbell",level:"Intermediate",sets:"3–4 × 8–12",desc:"Press the bar from your chest while keeping your shoulders controlled."},
+{name:"Push-Up",muscle:"Chest",equipment:"Bodyweight",level:"Beginner",sets:"3 × 8–15",desc:"Keep your body in a straight line and lower your chest with control."},
+{name:"Lat Pulldown",muscle:"Back",equipment:"Cable",level:"Beginner",sets:"3 × 8–12",desc:"Pull the bar toward your upper chest without swinging your body."},
+{name:"Barbell Row",muscle:"Back",equipment:"Barbell",level:"Intermediate",sets:"3 × 8–12",desc:"Hinge at the hips and pull the bar toward your torso."},
+{name:"Shoulder Press",muscle:"Shoulders",equipment:"Dumbbell",level:"Intermediate",sets:"3 × 8–12",desc:"Press dumbbells overhead while keeping your core stable."},
+{name:"Lateral Raise",muscle:"Shoulders",equipment:"Dumbbell",level:"Beginner",sets:"3 × 12–15",desc:"Raise the dumbbells out to your sides with controlled movement."},
+{name:"Biceps Curl",muscle:"Biceps",equipment:"Dumbbell",level:"Beginner",sets:"3 × 10–15",desc:"Curl the weights without swinging your elbows forward."},
+{name:"Triceps Pushdown",muscle:"Triceps",equipment:"Cable",level:"Beginner",sets:"3 × 10–15",desc:"Extend your elbows while keeping your upper arms stable."},
+{name:"Goblet Squat",muscle:"Legs",equipment:"Dumbbell",level:"Beginner",sets:"3 × 8–12",desc:"Squat with a dumbbell held at your chest and keep your knees controlled."},
+{name:"Romanian Deadlift",muscle:"Legs",equipment:"Barbell",level:"Intermediate",sets:"3 × 8–12",desc:"Hinge at the hips and lower the weight while keeping a neutral back."},
+{name:"Plank",muscle:"Abs",equipment:"Bodyweight",level:"Beginner",sets:"3 × 20–60 sec",desc:"Brace your core and maintain a straight line from head to heels."},
+{name:"Calf Raise",muscle:"Calves",equipment:"Bodyweight",level:"Beginner",sets:"3 × 12–20",desc:"Rise onto your toes slowly and lower with control."}
+];
+let workout=JSON.parse(localStorage.getItem("fitifyWorkout")||"[]");
+const groups=[...new Set(exercises.map(e=>e.muscle))];
+document.getElementById("muscles").innerHTML=groups.map(g=>`<div class="muscle" onclick="filterBy('${g}')"><b>${g}</b><small>${exercises.filter(e=>e.muscle===g).length} exercises</small></div>`).join("");
+function render(list=exercises){document.getElementById("exerciseList").innerHTML=list.map((e,i)=>`<article class="exercise"><h3>${e.name}</h3><span class="tag">${e.muscle}</span><span class="tag">${e.equipment}</span><span class="tag">${e.level}</span><p>${e.desc}</p><p><b>Suggested:</b> ${e.sets}</p><div class="actions"><button onclick="addWorkout(${exercises.indexOf(e)})">+ Add</button><button class="fav" onclick="fav('${e.name}')">☆ Favorite</button></div></article>`).join("")||"<p>No exercises found.</p>";}
+function filterBy(g){render(exercises.filter(e=>e.muscle===g));document.getElementById("exercises").scrollIntoView({behavior:"smooth"});}
+function filterExercises(){let q=document.getElementById("search").value.toLowerCase();render(exercises.filter(e=>(e.name+" "+e.muscle+" "+e.equipment).toLowerCase().includes(q)));}
+function showAll(){document.getElementById("search").value="";render();}
+function addWorkout(i){if(!workout.includes(i)){workout.push(i);save();renderWorkout();}}
+function clearWorkout(){workout=[];save();renderWorkout();}
+function save(){localStorage.setItem("fitifyWorkout",JSON.stringify(workout));}
+function renderWorkout(){document.getElementById("workoutList").innerHTML=workout.length?workout.map(i=>`<article class="exercise"><h3>${exercises[i].name}</h3><p>${exercises[i].muscle} • ${exercises[i].sets}</p><button class="fav" onclick="removeWorkout(${i})">Remove</button></article>`).join(""):"<p style='color:var(--muted)'>No exercises added yet. Add exercises from the library.</p>";}
+function removeWorkout(i){workout=workout.filter(x=>x!==i);save();renderWorkout();}
+function fav(n){alert(n+" saved as a favorite in this demo.");}
+render();renderWorkout();
+</script>
+</body></html>
