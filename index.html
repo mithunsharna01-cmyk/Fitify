@@ -1,495 +1,305 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fitify — Exercise & Workout</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fitify - Workout & Exercise Guide</title>
 
 <style>
-:root{
---bg:#0b0d10;
---card:#151922;
---card2:#1c2230;
---text:#f5f7fa;
---muted:#9ca6b5;
---accent:#65e35d;
---line:#282f3d;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
 }
 
-*{box-sizing:border-box}
-
-html{scroll-behavior:smooth}
-
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:var(--bg);
-color:var(--text)
+    background:#0b0f14;
+    color:#fff;
 }
 
 header{
-position:sticky;
-top:0;
-z-index:20;
-background:rgba(11,13,16,.97);
-backdrop-filter:blur(10px);
-border-bottom:1px solid var(--line)
+    background:#111820;
+    padding:18px 20px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    border-bottom:1px solid #27313d;
 }
 
-nav{
-max-width:1100px;
-margin:auto;
-padding:14px 18px;
-display:flex;
-align-items:center;
-justify-content:space-between
+.nav{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .logo{
-font-size:25px;
-font-weight:800
+    font-size:28px;
+    font-weight:bold;
 }
 
 .logo span{
-color:var(--accent)
+    color:#55e39a;
 }
 
-nav a{
-color:var(--muted);
-text-decoration:none;
-margin-left:18px;
-font-size:14px
+.nav-text{
+    color:#9ba8b8;
+    font-size:14px;
 }
 
-main{
-max-width:1100px;
-margin:auto;
-padding:24px 18px 60px
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:25px 18px 60px;
 }
 
 .hero{
-padding:34px 0 22px
+    padding:25px 0;
 }
 
 .hero h1{
-font-size:clamp(34px,7vw,60px);
-margin:0 0 10px
+    font-size:clamp(38px,7vw,60px);
+    margin-bottom:12px;
+}
+
+.hero h1 span{
+    color:#55e39a;
 }
 
 .hero p{
-color:var(--muted);
-max-width:650px;
-line-height:1.6
+    color:#9ba8b8;
+    line-height:1.6;
+    max-width:650px;
 }
 
 .search{
-display:flex;
-gap:10px;
-margin:24px 0
+    margin:20px 0;
 }
 
 .search input{
-flex:1;
-padding:15px 16px;
-border-radius:12px;
-border:1px solid var(--line);
-background:var(--card);
-color:white;
-font-size:16px;
-outline:none
+    width:100%;
+    padding:16px;
+    border-radius:12px;
+    border:1px solid #293544;
+    background:#121923;
+    color:white;
+    font-size:16px;
+    outline:none;
 }
 
 .search input:focus{
-border-color:var(--accent)
+    border-color:#55e39a;
 }
 
-button{
-border:0;
-border-radius:11px;
-padding:12px 16px;
-background:var(--accent);
-font-weight:700;
-cursor:pointer
+.categories{
+    display:flex;
+    gap:9px;
+    overflow-x:auto;
+    padding:5px 0 18px;
 }
 
-button:active{
-transform:scale(.98)
+.category{
+    white-space:nowrap;
+    padding:10px 15px;
+    border-radius:30px;
+    border:1px solid #293544;
+    background:#121923;
+    color:white;
+    cursor:pointer;
+}
+
+.category.active{
+    background:#55e39a;
+    color:#06120c;
+    border-color:#55e39a;
+    font-weight:bold;
 }
 
 .section-title{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin:30px 0 14px
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:15px 0;
 }
 
 .section-title h2{
-margin:0
+    font-size:25px;
 }
 
-.muscles,
-.exercises{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
-gap:12px
+.count{
+    color:#9ba8b8;
+    font-size:14px;
 }
 
-.muscle{
-background:var(--card);
-border:1px solid var(--line);
-padding:20px 15px;
-border-radius:15px;
-cursor:pointer
+.exercise-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
 }
 
-.muscle:hover{
-border-color:var(--accent)
+.exercise-card{
+    background:#121923;
+    border:1px solid #293544;
+    border-radius:16px;
+    padding:18px;
+    transition:0.2s;
 }
 
-.muscle b{
-display:block;
-margin-bottom:5px
-}
-
-.muscle small{
-color:var(--muted)
-}
-
-/* Exercise visual */
-
-.exercise-media{
-height:155px;
-border-radius:13px;
-margin:-2px -2px 14px;
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
-overflow:hidden;
-background:radial-gradient(
-circle at 50% 35%,
-#263247 0,
-#151922 62%,
-#101319 100%
-);
-border:1px solid var(--line)
-}
-
-.exercise-media .figure{
-font-size:64px;
-filter:drop-shadow(0 7px 10px rgba(0,0,0,.35))
-}
-
-.exercise-media .media-label{
-position:absolute;
-left:10px;
-bottom:9px;
-background:rgba(11,13,16,.78);
-padding:6px 9px;
-border-radius:8px;
-font-size:11px;
-color:var(--muted)
-}
-
-.detail-media{
-height:220px;
-margin:14px 0;
-border-radius:14px
-}
-
-.detail-media .figure{
-font-size:90px
-}
-
-/* Exercise card */
-
-.exercise{
-background:var(--card);
-border:1px solid var(--line);
-border-radius:15px;
-padding:17px;
-display:flex;
-flex-direction:column
-}
-
-.exercise h3{
-margin:0 0 8px
-}
-
-.tag{
-display:inline-block;
-background:var(--card2);
-color:var(--muted);
-padding:5px 8px;
-border-radius:8px;
-font-size:12px;
-margin:3px 3px 10px 0
-}
-
-.exercise p{
-color:var(--muted);
-font-size:14px;
-line-height:1.5
-}
-
-.actions{
-display:flex;
-gap:8px;
-margin-top:auto;
-flex-wrap:wrap
-}
-
-.fav{
-background:var(--card2);
-color:white
-}
-
-.fav.active{
-color:var(--accent)
-}
-
-.video-btn{
-background:#242b39;
-color:white
-}
-
-.small-btn{
-padding:9px 11px;
-font-size:13px
-}
-
-/* Stats */
-
-.stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-margin-top:16px
-}
-
-.stat{
-background:var(--card);
-border:1px solid var(--line);
-border-radius:14px;
-padding:16px
-}
-
-.stat b{
-font-size:24px;
-display:block
-}
-
-.stat span{
-color:var(--muted);
-font-size:13px
-}
-
-/* Workout */
-
-.workout-empty{
-color:var(--muted)
-}
-
-.workout-card{
-display:grid;
-grid-template-columns:1fr auto;
-gap:12px;
-align-items:center
-}
-
-.workout-controls{
-display:flex;
-gap:7px;
-flex-wrap:wrap;
-margin-top:8px
-}
-
-.workout-controls input{
-width:70px;
-padding:9px;
-border-radius:9px;
-border:1px solid var(--line);
-background:var(--card2);
-color:white
+.exercise-card:hover{
+    transform:translateY(-3px);
+    border-color:#55e39a;
 }
 
 .badge{
-display:inline-block;
-padding:5px 8px;
-border-radius:8px;
-background:var(--card2);
-color:var(--muted);
-font-size:12px
+    display:inline-block;
+    padding:6px 9px;
+    border-radius:8px;
+    background:#192431;
+    color:#55e39a;
+    font-size:12px;
+    margin-bottom:12px;
 }
 
-/* Timer */
-
-.timer{
-position:fixed;
-right:18px;
-bottom:18px;
-z-index:30;
-background:var(--card);
-border:1px solid var(--line);
-box-shadow:0 12px 35px rgba(0,0,0,.45);
-padding:16px;
-border-radius:16px;
-min-width:210px;
-display:none
+.exercise-card h3{
+    margin-bottom:10px;
+    font-size:19px;
 }
 
-.timer.show{
-display:block
+.info{
+    color:#9ba8b8;
+    font-size:14px;
+    line-height:1.7;
 }
 
-.timer-time{
-font-size:34px;
-font-weight:800;
-text-align:center;
-margin:5px 0 12px
+button{
+    cursor:pointer;
 }
 
-.timer-actions{
-display:flex;
-gap:7px
+.add-btn{
+    width:100%;
+    margin-top:15px;
+    padding:11px;
+    border-radius:10px;
+    border:1px solid #293544;
+    background:#192431;
+    color:white;
 }
 
-.timer-actions button{
-flex:1
+.add-btn:hover{
+    background:#55e39a;
+    color:#06120c;
 }
 
-/* Modal */
+.no-result{
+    grid-column:1/-1;
+    text-align:center;
+    padding:40px;
+    color:#9ba8b8;
+}
+
+/* MODAL */
+
+.modal-bg{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    z-index:200;
+    padding:20px;
+    overflow:auto;
+}
 
 .modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.72);
-z-index:50;
-display:none;
-align-items:center;
-justify-content:center;
-padding:18px
-}
-
-.modal.show{
-display:flex
-}
-
-.modal-box{
-width:min(620px,100%);
-max-height:90vh;
-overflow:auto;
-background:var(--card);
-border:1px solid var(--line);
-border-radius:18px;
-padding:22px
-}
-
-.modal-head{
-display:flex;
-justify-content:space-between;
-gap:15px;
-align-items:flex-start
-}
-
-.modal-head h2{
-margin:0
+    max-width:600px;
+    margin:5vh auto;
+    background:#121923;
+    border:1px solid #293544;
+    border-radius:18px;
+    padding:25px;
 }
 
 .close{
-background:var(--card2);
-color:white
+    float:right;
+    background:#192431;
+    border:0;
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
+    font-size:18px;
+}
+
+.modal h2{
+    margin:35px 0 15px;
+    font-size:28px;
 }
 
 .modal p{
-color:var(--muted);
-line-height:1.6
+    color:#b4bfcc;
+    line-height:1.7;
+    margin:10px 0;
 }
 
-.detail-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:8px;
-margin:16px 0
+.modal strong{
+    color:white;
 }
 
-.detail-grid div{
-background:var(--card2);
-padding:12px;
-border-radius:10px
+/* WORKOUT */
+
+.workout{
+    margin-top:40px;
+    padding:20px;
+    border-radius:16px;
+    background:#121923;
+    border:1px solid #293544;
 }
 
-.detail-grid small{
-color:var(--muted);
-display:block;
-margin-bottom:4px
+.workout h2{
+    margin-bottom:10px;
 }
 
-.steps{
-padding-left:20px;
-color:var(--muted);
-line-height:1.7
+.workout-list{
+    margin-top:15px;
 }
 
-.disclaimer{
-font-size:12px;
-color:var(--muted)
+.workout-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px;
+    border-bottom:1px solid #293544;
 }
 
-/* History */
-
-.history{
-display:flex;
-flex-direction:column;
-gap:8px
+.remove{
+    background:#192431;
+    border:0;
+    color:#ff8f8f;
+    padding:7px 10px;
+    border-radius:7px;
 }
 
-.history-item{
-background:var(--card);
-border:1px solid var(--line);
-padding:12px;
-border-radius:12px;
-color:var(--muted)
+/* MOBILE */
+
+@media(max-width:800px){
+    .exercise-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 }
 
-footer{
-text-align:center;
-color:var(--muted);
-border-top:1px solid var(--line);
-padding:25px
-}
+@media(max-width:550px){
+    .container{
+        padding:18px 13px 50px;
+    }
 
-@media(max-width:600px){
+    .exercise-grid{
+        grid-template-columns:1fr;
+    }
 
-nav a{
-display:none
-}
-
-.search{
-flex-direction:column
-}
-
-.search button{
-width:100%
-}
-
-.stats{
-grid-template-columns:1fr 1fr
-}
-
-.detail-grid{
-grid-template-columns:1fr
-}
-
-.workout-card{
-grid-template-columns:1fr
-}
-
-.timer{
-left:18px;
-right:18px
-}
-
+    .hero h1{
+        font-size:42px;
+    }
 }
 </style>
 </head>
@@ -497,284 +307,81 @@ right:18px
 <body>
 
 <header>
-<nav>
-<div class="logo">Fit<span>ify</span></div>
-
-<div>
-<a href="#exercises">Exercises</a>
-<a href="#workout">Workout</a>
-<a href="#history">History</a>
+<div class="nav">
+    <div class="logo">Fit<span>ify</span></div>
+    <div class="nav-text">Workout Library</div>
 </div>
-</nav>
 </header>
 
-
-<main>
+<main class="container">
 
 <section class="hero">
-
-<h1>
-Train smarter.<br>
-<span style="color:var(--accent)">Get stronger.</span>
-</h1>
-
-<p>
-Explore exercises by muscle group, equipment and difficulty.
-Build and track your workout with Fitify.
-</p>
+    <h1>Train <span>Smarter.</span></h1>
+    <p>
+        Explore exercises by muscle group, search exercises,
+        and create your own workout routine with Fitify.
+    </p>
+</section>
 
 <div class="search">
-
-<input
-id="search"
-placeholder="Search exercises, e.g. bench press"
-oninput="filterExercises()"
->
-
-<button onclick="showAll()">All</button>
-
+    <input
+        type="search"
+        id="search"
+        placeholder="Search exercises... e.g. Push Up, Squat"
+    >
 </div>
 
-<div class="stats">
-
-<div class="stat">
-<b id="exerciseCount">0</b>
-<span>Exercises</span>
-</div>
-
-<div class="stat">
-<b id="favoriteCount">0</b>
-<span>Favorites</span>
-</div>
-
-<div class="stat">
-<b id="workoutCount">0</b>
-<span>In workout</span>
-</div>
-
-</div>
-
-</section>
-
-
-<section>
+<div class="categories" id="categories"></div>
 
 <div class="section-title">
-<h2>Muscle Groups</h2>
+    <h2>Exercises</h2>
+    <div class="count" id="count"></div>
 </div>
 
-<div class="muscles" id="muscles"></div>
+<div class="exercise-grid" id="exerciseGrid"></div>
 
-</section>
+<section class="workout">
+    <h2>🏋️ My Workout</h2>
+    <p style="color:#9ba8b8">
+        Exercises you add will appear here.
+    </p>
 
-
-<section id="exercises">
-
-<div class="section-title">
-<h2>Exercise Library</h2>
-<button onclick="showAll()">All</button>
-</div>
-
-<div class="exercises" id="exerciseList"></div>
-
-</section>
-
-
-<section id="workout">
-
-<div class="section-title">
-
-<h2>My Workout</h2>
-
-<div>
-
-<button
-class="small-btn"
-onclick="startWorkoutTimer(60)"
->
-Rest 60s
-</button>
-
-<button
-class="small-btn"
-onclick="clearWorkout()"
->
-Clear
-</button>
-
-</div>
-
-</div>
-
-<div id="workoutList" class="exercises"></div>
-
-</section>
-
-
-<section id="history">
-
-<div class="section-title">
-
-<h2>Workout History</h2>
-
-<button
-class="small-btn"
-onclick="clearHistory()"
->
-Clear
-</button>
-
-</div>
-
-<div id="historyList" class="history"></div>
-
+    <div class="workout-list" id="workoutList"></div>
 </section>
 
 </main>
 
+<!-- MODAL -->
 
-<footer>
-© 2026 Fitify • Your original exercise & workout companion
-</footer>
+<div class="modal-bg" id="modalBg">
 
+<div class="modal">
 
-<!-- REST TIMER -->
+<button class="close" onclick="closeModal()">✕</button>
 
-<div id="timer" class="timer">
-
-<div style="color:var(--muted);text-align:center">
-REST TIMER
-</div>
-
-<div id="timerTime" class="timer-time">
-01:00
-</div>
-
-<div class="timer-actions">
-
-<button
-onclick="toggleTimer()"
-id="timerToggle"
->
-Start
-</button>
-
-<button onclick="resetTimer()">
-Reset
-</button>
+<div id="modalContent"></div>
 
 </div>
 
 </div>
-
-
-<!-- EXERCISE DETAILS -->
-
-<div
-id="detailModal"
-class="modal"
-onclick="closeDetails(event)"
->
-
-<div class="modal-box">
-
-<div class="modal-head">
-
-<div>
-
-<h2 id="detailName"></h2>
-
-<div id="detailTags"></div>
-
-</div>
-
-<button
-class="close"
-onclick="hideDetails()"
->
-✕
-</button>
-
-</div>
-
-
-<div id="detailMedia"></div>
-
-
-<div class="detail-grid">
-
-<div>
-<small>Muscle</small>
-<b id="detailMuscle"></b>
-</div>
-
-<div>
-<small>Equipment</small>
-<b id="detailEquipment"></b>
-</div>
-
-<div>
-<small>Level</small>
-<b id="detailLevel"></b>
-</div>
-
-</div>
-
-
-<p id="detailDesc"></p>
-
-<h3>How to perform</h3>
-
-<ol
-id="detailSteps"
-class="steps"
-></ol>
-
-<p>
-<b>Suggested:</b>
-<span id="detailSets"></span>
-</p>
-
-<p class="disclaimer">
-Use controlled movement and choose a difficulty appropriate for you.
-</p>
-
-<div class="actions">
-
-<button onclick="addCurrentWorkout()">
-+ Add to My Workout
-</button>
-
-<button
-class="video-btn"
-onclick="openCurrentVideo()"
->
-▶ Watch Demo
-</button>
-
-</div>
-
-</div>
-
-</div>
-
 
 <script>
 
-/* =========================
-   EXERCISE DATABASE
-========================= */
+const muscles = [
+    "All",
+    "Chest",
+    "Back",
+    "Shoulders",
+    "Biceps",
+    "Triceps",
+    "Legs",
+    "Glutes",
+    "Abs",
+    "Calves",
+    "Forearms"
+];
 
-const exercises=[
-
-{
-name:"Bench Press",
-muscle:"Chest",
-equipment:"Barbell",
-level:"Intermediate",
-sets:"3–4 × 8–12",
-desc:"Press the bar from your chest while keeping your shoulders controlled."
-},
+const exercises = [
 
 {
 name:"Push-Up",
@@ -782,7 +389,38 @@ muscle:"Chest",
 equipment:"Bodyweight",
 level:"Beginner",
 sets:"3 × 8–15",
-desc:"Keep your body in a straight line and lower your chest with control."
+rest:"60 sec",
+description:"Keep your body straight, lower yourself with control and push back up."
+},
+
+{
+name:"Bench Press",
+muscle:"Chest",
+equipment:"Barbell",
+level:"Intermediate",
+sets:"3 × 6–10",
+rest:"90 sec",
+description:"Keep your feet stable and control the bar throughout the movement."
+},
+
+{
+name:"Incline Dumbbell Press",
+muscle:"Chest",
+equipment:"Dumbbells",
+level:"Intermediate",
+sets:"3 × 8–12",
+rest:"90 sec",
+description:"Press the dumbbells upward while maintaining a comfortable range of motion."
+},
+
+{
+name:"Pull-Up",
+muscle:"Back",
+equipment:"Bodyweight",
+level:"Intermediate",
+sets:"3 × 5–10",
+rest:"90 sec",
+description:"Pull yourself upward with control and avoid excessive swinging."
 },
 
 {
@@ -791,43 +429,58 @@ muscle:"Back",
 equipment:"Cable",
 level:"Beginner",
 sets:"3 × 8–12",
-desc:"Pull the bar toward your upper chest without swinging your body."
+rest:"75 sec",
+description:"Pull the bar toward your upper chest while keeping your movement controlled."
 },
 
 {
-name:"Barbell Row",
+name:"One Arm Dumbbell Row",
 muscle:"Back",
-equipment:"Barbell",
-level:"Intermediate",
+equipment:"Dumbbell",
+level:"Beginner",
 sets:"3 × 8–12",
-desc:"Hinge at the hips and pull the bar toward your torso."
+rest:"75 sec",
+description:"Keep your torso stable and pull the elbow toward your side."
 },
 
 {
-name:"Shoulder Press",
+name:"Overhead Press",
 muscle:"Shoulders",
-equipment:"Dumbbell",
+equipment:"Dumbbells",
 level:"Intermediate",
-sets:"3 × 8–12",
-desc:"Press dumbbells overhead while keeping your core stable."
+sets:"3 × 6–10",
+rest:"90 sec",
+description:"Brace your core and press the weights upward smoothly."
 },
 
 {
 name:"Lateral Raise",
 muscle:"Shoulders",
-equipment:"Dumbbell",
+equipment:"Dumbbells",
 level:"Beginner",
-sets:"3 × 12–15",
-desc:"Raise the dumbbells out to your sides with controlled movement."
+sets:"3 × 10–15",
+rest:"60 sec",
+description:"Use controlled movement and comfortable resistance."
 },
 
 {
 name:"Biceps Curl",
 muscle:"Biceps",
-equipment:"Dumbbell",
+equipment:"Dumbbells",
 level:"Beginner",
-sets:"3 × 10–15",
-desc:"Curl the weights without swinging your elbows forward."
+sets:"3 × 8–15",
+rest:"60 sec",
+description:"Keep your elbows close to your body and avoid swinging."
+},
+
+{
+name:"Hammer Curl",
+muscle:"Biceps",
+equipment:"Dumbbells",
+level:"Beginner",
+sets:"3 × 8–15",
+rest:"60 sec",
+description:"Keep your wrists neutral and perform the movement slowly."
 },
 
 {
@@ -835,8 +488,29 @@ name:"Triceps Pushdown",
 muscle:"Triceps",
 equipment:"Cable",
 level:"Beginner",
+sets:"3 × 8–15",
+rest:"60 sec",
+description:"Keep your elbows close to your body and control the return."
+},
+
+{
+name:"Close Grip Push-Up",
+muscle:"Triceps",
+equipment:"Bodyweight",
+level:"Beginner",
+sets:"3 × 8–15",
+rest:"60 sec",
+description:"Maintain a stable body position and keep your elbows controlled."
+},
+
+{
+name:"Bodyweight Squat",
+muscle:"Legs",
+equipment:"Bodyweight",
+level:"Beginner",
 sets:"3 × 10–15",
-desc:"Extend your elbows while keeping your upper arms stable."
+rest:"60 sec",
+description:"Keep your feet stable and move through a comfortable range."
 },
 
 {
@@ -845,25 +519,28 @@ muscle:"Legs",
 equipment:"Dumbbell",
 level:"Beginner",
 sets:"3 × 8–12",
-desc:"Squat with a dumbbell held at your chest and keep your knees controlled."
+rest:"75 sec",
+description:"Hold the weight close to your chest and keep your torso controlled."
 },
 
 {
 name:"Romanian Deadlift",
 muscle:"Legs",
-equipment:"Barbell",
+equipment:"Dumbbells",
 level:"Intermediate",
 sets:"3 × 8–12",
-desc:"Hinge at the hips and lower the weight while keeping a neutral back."
+rest:"90 sec",
+description:"Hinge at the hips while keeping your spine in a neutral position."
 },
 
 {
-name:"Plank",
-muscle:"Abs",
+name:"Glute Bridge",
+muscle:"Glutes",
 equipment:"Bodyweight",
 level:"Beginner",
-sets:"3 × 20–60 sec",
-desc:"Brace your core and maintain a straight line from head to heels."
+sets:"3 × 10–15",
+rest:"60 sec",
+description:"Lift through your hips and pause briefly at the top."
 },
 
 {
@@ -872,779 +549,405 @@ muscle:"Calves",
 equipment:"Bodyweight",
 level:"Beginner",
 sets:"3 × 12–20",
-desc:"Rise onto your toes slowly and lower with control."
+rest:"45 sec",
+description:"Move slowly through a comfortable range of motion."
+},
+
+{
+name:"Plank",
+muscle:"Abs",
+equipment:"Bodyweight",
+level:"Beginner",
+sets:"3 × 20–45 sec",
+rest:"45 sec",
+description:"Keep your body aligned and breathe normally."
+},
+
+{
+name:"Dead Bug",
+muscle:"Abs",
+equipment:"Bodyweight",
+level:"Beginner",
+sets:"3 × 8–12 / side",
+rest:"45 sec",
+description:"Move slowly while keeping your core controlled."
+},
+
+{
+name:"Wrist Curl",
+muscle:"Forearms",
+equipment:"Dumbbell",
+level:"Beginner",
+sets:"3 × 10–15",
+rest:"45 sec",
+description:"Use light resistance and controlled wrist movement."
 }
 
 ];
 
+let selectedMuscle = "All";
 
-/* =========================
-   STORAGE
-========================= */
+const categoryContainer =
+document.getElementById("categories");
 
-let workout =
-JSON.parse(
-localStorage.getItem("fitifyWorkout") || "[]"
-);
+const grid =
+document.getElementById("exerciseGrid");
 
-let favorites =
-JSON.parse(
-localStorage.getItem("fitifyFavorites") || "[]"
-);
+const search =
+document.getElementById("search");
 
-let history =
-JSON.parse(
-localStorage.getItem("fitifyHistory") || "[]"
-);
+const count =
+document.getElementById("count");
 
-let currentExercise=null;
+const workoutList =
+document.getElementById("workoutList");
 
-let timerSeconds=60;
-let timerInterval=null;
+const modalBg =
+document.getElementById("modalBg");
 
+const modalContent =
+document.getElementById("modalContent");
 
-/* =========================
-   MUSCLE GROUPS
-========================= */
 
-const groups=[
-...new Set(
-exercises.map(e=>e.muscle)
-)
-];
+/* CREATE CATEGORIES */
 
-document.getElementById("exerciseCount").textContent=
-exercises.length;
+muscles.forEach(muscle => {
 
+    const button =
+    document.createElement("button");
 
-document.getElementById("muscles").innerHTML=
+    button.className =
+    "category" +
+    (muscle === "All" ? " active" : "");
 
-groups.map(g=>`
+    button.textContent = muscle;
 
-<div
-class="muscle"
-onclick="filterBy('${g}')"
->
+    button.onclick = () => {
 
-<b>${g}</b>
+        selectedMuscle = muscle;
 
-<small>
-${exercises.filter(
-e=>e.muscle===g
-).length}
-exercises
-</small>
+        document
+        .querySelectorAll(".category")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
 
-</div>
+        button.classList.add("active");
 
-`).join("");
+        renderExercises();
 
+    };
 
-/* =========================
-   VISUALS
-========================= */
+    categoryContainer.appendChild(button);
 
-const exerciseVisuals={
-
-"Bench Press":"🏋️",
-
-"Push-Up":"🤸",
-
-"Lat Pulldown":"💪",
-
-"Barbell Row":"🏋️",
-
-"Shoulder Press":"🙆",
-
-"Lateral Raise":"💪",
-
-"Biceps Curl":"💪",
-
-"Triceps Pushdown":"💪",
-
-"Goblet Squat":"🦵",
-
-"Romanian Deadlift":"🏋️",
-
-"Plank":"🧘",
-
-"Calf Raise":"🦶"
-
-};
-
-
-const exerciseSteps={
-
-"Bench Press":[
-"Set up securely on the bench and grip the bar evenly.",
-"Lower the bar with control toward the chest.",
-"Press upward while keeping the movement controlled."
-],
-
-"Push-Up":[
-"Start in a straight-body position with hands under the shoulders.",
-"Lower your body under control.",
-"Push back up while keeping your body aligned."
-],
-
-"Lat Pulldown":[
-"Sit tall and grip the bar comfortably.",
-"Pull the bar toward the upper chest without swinging.",
-"Return the bar slowly to the starting position."
-],
-
-"Barbell Row":[
-"Hinge at the hips while keeping a neutral back.",
-"Pull the bar toward your torso.",
-"Lower it slowly and repeat."
-],
-
-"Shoulder Press":[
-"Start with the weights around shoulder height.",
-"Press upward in a controlled motion.",
-"Lower the weights carefully."
-],
-
-"Lateral Raise":[
-"Hold the weights beside your body.",
-"Raise your arms out to the sides with control.",
-"Lower slowly."
-],
-
-"Biceps Curl":[
-"Keep your upper arms stable.",
-"Curl the weights upward without swinging.",
-"Lower them under control."
-],
-
-"Triceps Pushdown":[
-"Keep your upper arms close to your sides.",
-"Extend your elbows downward.",
-"Return slowly without losing control."
-],
-
-"Goblet Squat":[
-"Hold the dumbbell close to your chest.",
-"Lower into a controlled squat.",
-"Stand up while keeping your movement steady."
-],
-
-"Romanian Deadlift":[
-"Hinge at the hips with a neutral back.",
-"Lower the weight along the legs under control.",
-"Drive through the hips to return upright."
-],
-
-"Plank":[
-"Place your body in a stable straight line.",
-"Brace your core and breathe normally.",
-"Hold for the planned time."
-],
-
-"Calf Raise":[
-"Stand tall with controlled balance.",
-"Rise onto your toes slowly.",
-"Lower your heels with control."
-]
-
-};
-
-
-/* =========================
-   VISUAL CARD
-========================= */
-
-function visual(e,cls=""){
-
-const icon=
-exerciseVisuals[e.name] || "🏋️";
-
-return `
-
-<div class="exercise-media ${cls}">
-
-<div class="figure">
-${icon}
-</div>
-
-<div class="media-label">
-Fitify exercise visual
-</div>
-
-</div>
-
-`;
-
-}
-
-
-/* =========================
-   YOUTUBE DEMO
-========================= */
-
-function videoSearchUrl(e){
-
-return "https://www.youtube.com/results?search_query="+
-
-encodeURIComponent(
-"how to do "+e.name+" exercise"
-);
-
-}
-
-
-function openVideo(name){
-
-const e=
-exercises.find(
-x=>x.name===name
-);
-
-if(e){
-
-window.open(
-videoSearchUrl(e),
-"_blank"
-);
-
-}
-
-}
-
-
-/* =========================
-   EXERCISE MEDIA
-========================= */
-
-function exerciseMedia(e){
-
-return `
-
-${visual(e)}
-
-<div
-class="actions"
-style="margin-bottom:10px"
->
-
-<button
-class="video-btn small-btn"
-onclick="openVideo('${e.name}')"
->
-▶ Watch Demo
-</button>
-
-</div>
-
-`;
-
-}
-
-
-/* =========================
-   RENDER EXERCISES
-========================= */
-
-function render(list=exercises){
-
-document.getElementById(
-"exerciseList"
-).innerHTML=
-
-list.map(e=>{
-
-const i=
-exercises.indexOf(e);
-
-const active=
-favorites.includes(e.name);
-
-return `
-
-<article class="exercise">
-
-${exerciseMedia(e)}
-
-<h3>
-${e.name}
-</h3>
-
-<div>
-
-<span class="tag">
-${e.muscle}
-</span>
-
-<span class="tag">
-${e.equipment}
-</span>
-
-<span class="tag">
-${e.level}
-</span>
-
-</div>
-
-<p>
-${e.desc}
-</p>
-
-<p>
-<b>Suggested:</b>
-${e.sets}
-</p>
-
-<div class="actions">
-
-<button
-onclick="addWorkout(${i})"
->
-+ Add
-</button>
-
-<button
-class="fav ${active?"active":""}"
-onclick="toggleFavorite('${e.name}')"
->
-${active?"★ Saved":"☆ Favorite"}
-</button>
-
-<button
-class="fav"
-onclick="showDetails(${i})"
->
-Details
-</button>
-
-</div>
-
-</article>
-
-`;
-
-}).join("")
-
-||
-
-"<p class='workout-empty'>No exercises found.</p>";
-
-updateStats();
-
-}
-
-
-/* =========================
-   FILTER
-========================= */
-
-function filterBy(g){
-
-render(
-exercises.filter(
-e=>e.muscle===g
-)
-);
-
-document.getElementById(
-"exercises"
-).scrollIntoView({
-behavior:"smooth"
 });
 
+
+/* RENDER EXERCISES */
+
+function renderExercises(){
+
+    const query =
+    search.value.toLowerCase().trim();
+
+    const filtered =
+    exercises.filter(exercise => {
+
+        const muscleMatch =
+        selectedMuscle === "All" ||
+        exercise.muscle === selectedMuscle;
+
+        const searchMatch =
+        (
+            exercise.name +
+            " " +
+            exercise.muscle +
+            " " +
+            exercise.equipment
+        )
+        .toLowerCase()
+        .includes(query);
+
+        return muscleMatch && searchMatch;
+
+    });
+
+    count.textContent =
+    filtered.length + " exercises";
+
+    if(filtered.length === 0){
+
+        grid.innerHTML =
+        `<div class="no-result">
+        No exercises found.<br>
+        Try another search or muscle group.
+        </div>`;
+
+        return;
+    }
+
+    grid.innerHTML = "";
+
+    filtered.forEach(exercise => {
+
+        const card =
+        document.createElement("div");
+
+        card.className =
+        "exercise-card";
+
+        card.innerHTML = `
+
+        <span class="badge">
+            ${exercise.muscle}
+        </span>
+
+        <h3>
+            ${exercise.name}
+        </h3>
+
+        <div class="info">
+
+            Equipment:
+            ${exercise.equipment}
+
+            <br>
+
+            Level:
+            ${exercise.level}
+
+            <br>
+
+            ${exercise.sets}
+
+            · Rest ${exercise.rest}
+
+        </div>
+
+        <button class="add-btn">
+            ＋ Add to My Workout
+        </button>
+
+        `;
+
+        card.onclick = () =>
+        showDetails(exercise);
+
+        card.querySelector(".add-btn")
+        .onclick = (event) => {
+
+            event.stopPropagation();
+
+            addToWorkout(exercise.name);
+
+        };
+
+        grid.appendChild(card);
+
+    });
+
 }
 
 
-function filterExercises(){
+/* SEARCH */
 
-let q=
-document.getElementById(
-"search"
-).value
-.toLowerCase()
-.trim();
-
-render(
-
-exercises.filter(e=>
-
-(
-e.name+" "+
-e.muscle+" "+
-e.equipment+" "+
-e.level
-)
-.toLowerCase()
-.includes(q)
-
-)
-
+search.addEventListener(
+    "input",
+    renderExercises
 );
 
+
+/* DETAILS */
+
+function showDetails(exercise){
+
+    modalContent.innerHTML = `
+
+        <span class="badge">
+            ${exercise.muscle}
+        </span>
+
+        <h2>
+            ${exercise.name}
+        </h2>
+
+        <p>
+            <strong>Equipment:</strong>
+            ${exercise.equipment}
+        </p>
+
+        <p>
+            <strong>Level:</strong>
+            ${exercise.level}
+        </p>
+
+        <p>
+            <strong>Suggested Sets & Reps:</strong>
+            ${exercise.sets}
+        </p>
+
+        <p>
+            <strong>Rest:</strong>
+            ${exercise.rest}
+        </p>
+
+        <p>
+            <strong>How to perform:</strong><br>
+            ${exercise.description}
+        </p>
+
+        <p>
+            <strong>Safety:</strong><br>
+            Use controlled movement and comfortable
+            resistance. Stop if you feel sharp pain
+            or feel unwell.
+        </p>
+
+    `;
+
+    modalBg.style.display = "block";
 }
 
 
-function showAll(){
+/* CLOSE MODAL */
 
-document.getElementById(
-"search"
-).value="";
+function closeModal(){
 
-render();
+    modalBg.style.display = "none";
+
+}
+
+modalBg.onclick = function(event){
+
+    if(event.target === modalBg){
+
+        closeModal();
+
+    }
+
+};
+
+
+/* MY WORKOUT */
+
+function getWorkout(){
+
+    return JSON.parse(
+        localStorage.getItem("fitifyWorkout") || "[]"
+    );
 
 }
 
 
-/* =========================
-   WORKOUT
-========================= */
+function addToWorkout(name){
 
-function addWorkout(i){
+    let workout =
+    getWorkout();
 
-if(!workout.includes(i)){
+    if(!workout.includes(name)){
 
-workout.push(i);
+        workout.push(name);
 
-save();
+        localStorage.setItem(
+            "fitifyWorkout",
+            JSON.stringify(workout)
+        );
 
-renderWorkout();
+        renderWorkout();
 
-render();
+        alert(
+            name +
+            " added to My Workout!"
+        );
 
-}
+    }else{
 
-}
+        alert(
+            "This exercise is already in My Workout."
+        );
 
-
-function clearWorkout(){
-
-if(!workout.length)
-return;
-
-workout=[];
-
-save();
-
-renderWorkout();
-
-render();
+    }
 
 }
 
 
-function removeWorkout(i){
+function removeFromWorkout(name){
 
-workout=
-workout.filter(
-x=>x!==i
-);
+    let workout =
+    getWorkout();
 
-save();
+    workout =
+    workout.filter(
+        exercise => exercise !== name
+    );
 
-renderWorkout();
+    localStorage.setItem(
+        "fitifyWorkout",
+        JSON.stringify(workout)
+    );
 
-render();
-
-}
-
-
-function save(){
-
-localStorage.setItem(
-"fitifyWorkout",
-JSON.stringify(workout)
-);
+    renderWorkout();
 
 }
 
 
 function renderWorkout(){
 
-const el=
-document.getElementById(
-"workoutList"
-);
+    const workout =
+    getWorkout();
 
-if(!workout.length){
+    if(workout.length === 0){
 
-el.innerHTML=
-"<p class='workout-empty'>No exercises added yet. Add exercises from the library.</p>";
+        workoutList.innerHTML =
+        `<p style="color:#9ba8b8">
+        No exercises added yet.
+        </p>`;
 
-updateStats();
+        return;
 
-return;
+    }
 
-}
+    workoutList.innerHTML = "";
 
+    workout.forEach(name => {
 
-el.innerHTML=
+        const item =
+        document.createElement("div");
 
-workout.map(i=>{
+        item.className =
+        "workout-item";
 
-const e=
-exercises[i];
+        item.innerHTML = `
 
-return `
+        <span>
+            ${name}
+        </span>
 
-<article
-class="exercise workout-card"
->
+        <button class="remove">
+            Remove
+        </button>
 
-<div>
+        `;
 
-<h3>
-${e.name}
-</h3>
+        item
+        .querySelector(".remove")
+        .onclick = () =>
+        removeFromWorkout(name);
 
-<span class="badge">
-${e.muscle}
-</span>
+        workoutList.appendChild(item);
 
-<span class="badge">
-${e.sets}
-</span>
-
-<div class="workout-controls">
-
-<label class="badge">
-
-Sets
-
-<input
-type="number"
-min="1"
-max="20"
-value="3"
->
-
-</label>
-
-<label class="badge">
-
-Reps
-
-<input
-type="number"
-min="1"
-max="100"
-value="10"
->
-
-</label>
-
-<button
-class="small-btn"
-onclick="startWorkoutTimer(60)"
->
-Rest 60s
-</button>
-
-</div>
-
-</div>
-
-<button
-class="fav"
-onclick="removeWorkout(${i})"
->
-Remove
-</button>
-
-</article>
-
-`;
-
-}).join("");
-
-updateStats();
+    });
 
 }
 
 
-/* =========================
-   FAVORITES
-========================= */
+/* START */
 
-function toggleFavorite(name){
+renderExercises();
 
-if(
-favorites.includes(name)
-){
+renderWorkout();
 
-favorites=
-favorites.filter(
-x=>x!==name
-);
+</script>
 
-}else{
-
-favorites.push(name);
-
-}
-
-localStorage.setItem(
-"fitifyFavorites",
-JSON.stringify(favorites)
-);
-
-render();
-
-}
-
-
-/* =========================
-   STATS
-========================= */
-
-function updateStats(){
-
-document.getElementById(
-"favoriteCount"
-).textContent=
-favorites.length;
-
-document.getElementById(
-"workoutCount"
-).textContent=
-workout.length;
-
-}
-
-
-/* =========================
-   DETAILS MODAL
-========================= */
-
-function showDetails(i){
-
-currentExercise=i;
-
-const e=
-exercises[i];
-
-
-document.getElementById(
-"detailName"
-).textContent=
-e.name;
-
-
-document.getElementById(
-"detailTags"
-).innerHTML=
-
-`
-<span class="tag">
-${e.muscle}
-</span>
-
-<span class="tag">
-${e.equipment}
-</span>
-
-<span class="tag">
-${e.level}
-</span>
-`;
-
-
-document.getElementById(
-"detailMuscle"
-).textContent=
-e.muscle;
-
-
-document.getElementById(
-"detailEquipment"
-).textContent=
-e.equipment;
-
-
-document.getElementById(
-"detailLevel"
-).textContent=
-e.level;
-
-
-document.getElementById(
-"detailDesc"
-).textContent=
-e.desc;
-
-
-document.getElementById(
-"detailMedia"
-).innerHTML=
-visual(e,"detail-media");
-
-
-document.getElementById(
-"detailSteps"
-).innerHTML=
-
-(
-exerciseSteps[e.name] || []
-)
-
-.map(
-s=>`<li>${s}</li>`
-)
-
-.join("");
-
-
-document.getElementById(
-"detailSets"
-).textContent=
-e.sets;
-
-
-document.getElementById(
-"detailModal"
-).classList.add("show");
-
-}
-
-
-function hideDetails(){
-
-document.getElementById(
-"detailModal"
-).classList.remove("show");
-
-}
-
-
-function closeDetails(e){
-
-if(
-e.target.id==="detailModal"
-){
-
-hideDetails();
-
-}
-
-}
-
-
-function addCurrentWorkout(){
-
-if(
-currentExercise!==null
-){
-
-addWorkout(
-currentExercise
-);
-
-hideDetails();
-
-}
-
-}
-
-
-function openCurrentVideo(){
-
-if(
-currentExercise!==null
+</body>
+</html>
