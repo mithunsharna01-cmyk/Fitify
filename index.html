@@ -53,7 +53,7 @@ footer{text-align:center;color:var(--muted);border-top:1px solid var(--line);pad
 <script>
 const exercises=[
 {name:"Bench Press",muscle:"Chest",equipment:"Barbell",level:"Intermediate",sets:"3–4 × 8–12",desc:"Press the bar from your chest while keeping your shoulders controlled."},
-{name:"Push-Up",muscle:"Chest",equipment:"Bodyweight",level:"Beginner",sets:"3 × 8–15",desc:"Keep your body in a straight line and lower your chest with control."},
+{name:"Push-Up",muscle:"Chest",equipment:"Bodyweight",level:"Beginner",sets:"3 × 8–15",desc:"Keep your body in a straight line and lower your chest with control,image:"push-up-4747.jpg."},
 {name:"Lat Pulldown",muscle:"Back",equipment:"Cable",level:"Beginner",sets:"3 × 8–12",desc:"Pull the bar toward your upper chest without swinging your body."},
 {name:"Barbell Row",muscle:"Back",equipment:"Barbell",level:"Intermediate",sets:"3 × 8–12",desc:"Hinge at the hips and pull the bar toward your torso."},
 {name:"Shoulder Press",muscle:"Shoulders",equipment:"Dumbbell",level:"Intermediate",sets:"3 × 8–12",desc:"Press dumbbells overhead while keeping your core stable."},
@@ -68,7 +68,7 @@ const exercises=[
 let workout=JSON.parse(localStorage.getItem("fitifyWorkout")||"[]");
 const groups=[...new Set(exercises.map(e=>e.muscle))];
 document.getElementById("muscles").innerHTML=groups.map(g=>`<div class="muscle" onclick="filterBy('${g}')"><b>${g}</b><small>${exercises.filter(e=>e.muscle===g).length} exercises</small></div>`).join("");
-function render(list=exercises){document.getElementById("exerciseList").innerHTML=list.map((e,i)=>`<article class="exercise"><h3>${e.name}</h3><span class="tag">${e.muscle}</span><span class="tag">${e.equipment}</span><span class="tag">${e.level}</span><p>${e.desc}</p><p><b>Suggested:</b> ${e.sets}</p><div class="actions"><button onclick="addWorkout(${exercises.indexOf(e)})">+ Add</button><button class="fav" onclick="fav('${e.name}')">☆ Favorite</button></div></article>`).join("")||"<p>No exercises found.</p>";}
+function render(list=exercises){document.getElementById("exerciseList").innerHTML=list.map(e=>`<article class="exercise"><div>${e.image?`<img src="${e.image}" alt="${e.name}" style="width:100%;height:180px;object-fit:cover;border-radius:12px;">`:''}</div><h3>${e.name}</h3><p>${e.muscle} • ${e.equipment} • ${e.level}</p><small>${e.sets}</small><button onclick="addWorkout('${e.name}')">Add</button><button onclick="fav('${e.name}')">Favorite</button></article>`).join("");}
 function filterBy(g){render(exercises.filter(e=>e.muscle===g));document.getElementById("exercises").scrollIntoView({behavior:"smooth"});}
 function filterExercises(){let q=document.getElementById("search").value.toLowerCase();render(exercises.filter(e=>(e.name+" "+e.muscle+" "+e.equipment).toLowerCase().includes(q)));}
 function showAll(){document.getElementById("search").value="";render();}
