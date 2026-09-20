@@ -3,7 +3,7 @@
   "short_name": "Fitify",
   "start_url": "https://mithunsharma01-cmyk.github.io/Fitify/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#FFFFFF",
   "theme_color": "#000000",
   "icons": [
     {
