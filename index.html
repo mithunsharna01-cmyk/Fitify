@@ -3,11 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Fitify - Exercise & Workout Library</title>
-
-<meta name="description" content="Fitify is an exercise and workout library with exercises by muscle group, equipment and difficulty.">
-<meta name="keywords" content="Fitify, workout, gym exercises, exercise library, chest workout, back workout, leg workout, biceps, triceps">
+<title>Fitify - Workout & Exercise Library</title>
 
 <style>
 :root{
@@ -35,65 +31,73 @@ body{
   font-family:Arial,Helvetica,sans-serif;
   background:var(--bg);
   color:var(--text);
+  line-height:1.5;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
+button,input,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
 }
 
 header{
   position:sticky;
   top:0;
   z-index:100;
-  background:rgba(9,11,13,.96);
+  background:rgba(9,11,13,.94);
+  backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line);
-  backdrop-filter:blur(10px);
 }
 
-nav{
-  max-width:1150px;
+.nav{
+  max-width:1200px;
   margin:auto;
-  padding:14px 18px;
+  padding:16px 20px;
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:20px;
 }
 
 .logo{
-  font-size:24px;
-  font-weight:800;
-}
-
-.logo span{
+  font-size:25px;
+  font-weight:900;
   color:var(--accent);
+  letter-spacing:.5px;
 }
 
-.navlinks{
+.nav-links{
   display:flex;
   gap:20px;
-  font-size:14px;
-  color:var(--muted);
 }
 
-.navlinks a:hover{
+.nav-links a{
+  color:var(--text);
+  text-decoration:none;
+  font-size:14px;
+}
+
+.nav-links a:hover{
   color:var(--accent);
 }
 
-main{
-  max-width:1150px;
+.container{
+  max-width:1200px;
   margin:auto;
-  padding:25px 16px 70px;
+  padding:0 20px;
 }
 
 .hero{
-  padding:35px 0 25px;
+  padding:70px 0 45px;
+  text-align:center;
 }
 
 .hero h1{
-  font-size:clamp(34px,7vw,64px);
-  line-height:1.05;
-  margin-bottom:15px;
+  font-size:clamp(36px,7vw,70px);
+  line-height:1;
+  margin-bottom:18px;
 }
 
 .hero h1 span{
@@ -103,273 +107,464 @@ main{
 .hero p{
   color:var(--muted);
   max-width:650px;
-  line-height:1.6;
+  margin:auto;
+  font-size:17px;
 }
 
-.searchbox{
-  display:flex;
-  gap:10px;
-  margin-top:24px;
+.search-box{
+  max-width:700px;
+  margin:30px auto 0;
+  position:relative;
 }
 
-.searchbox input{
-  flex:1;
-  padding:16px;
-  border-radius:12px;
+.search-box input{
+  width:100%;
+  background:var(--card);
+  color:var(--text);
   border:1px solid var(--line);
-  background:#141923;
-  color:white;
+  border-radius:14px;
+  padding:17px 20px;
   outline:none;
-  font-size:15px;
+  font-size:16px;
 }
 
-.searchbox input:focus{
+.search-box input:focus{
   border-color:var(--accent);
 }
 
-button{
-  border:0;
-  border-radius:10px;
-  padding:11px 15px;
-  background:var(--accent);
-  color:#061006;
-  font-weight:700;
-  cursor:pointer;
-}
-
-button:hover{
-  filter:brightness(1.08);
-}
-
 .section{
-  margin-top:35px;
+  padding:35px 0;
 }
 
 .section-title{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:10px;
-  margin-bottom:15px;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:20px;
 }
 
 .section-title h2{
-  font-size:21px;
+  font-size:28px;
+}
+
+.muted{
+  color:var(--muted);
+  font-size:14px;
 }
 
 .muscles{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-  gap:10px;
+  grid-template-columns:repeat(6,1fr);
+  gap:12px;
 }
 
 .muscle{
   background:var(--card);
   border:1px solid var(--line);
-  border-radius:13px;
-  padding:15px;
-  cursor:pointer;
+  padding:18px 10px;
+  text-align:center;
+  border-radius:14px;
   transition:.2s;
 }
 
 .muscle:hover{
+  transform:translateY(-3px);
   border-color:var(--accent);
-  transform:translateY(-2px);
 }
 
-.muscle b{
+.muscle strong{
   display:block;
-  margin-bottom:7px;
+  margin-bottom:4px;
 }
 
-.muscle small{
-  color:var(--muted);
-}
-
-.exercises{
+.filters{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:15px;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:12px;
+  margin-bottom:25px;
 }
 
-.exercise{
+.filters input,
+.filters select{
+  width:100%;
+  background:var(--card);
+  color:var(--text);
+  border:1px solid var(--line);
+  padding:13px;
+  border-radius:10px;
+  outline:none;
+}
+
+.filters input:focus,
+.filters select:focus{
+  border-color:var(--accent);
+}
+
+.exercise-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.exercise-card{
   background:var(--card);
   border:1px solid var(--line);
-  border-radius:15px;
+  border-radius:17px;
   overflow:hidden;
-  transition:.2s;
+  transition:.25s;
 }
 
-.exercise:hover{
-  transform:translateY(-3px);
-  border-color:#3b4658;
+.exercise-card:hover{
+  transform:translateY(-4px);
+  border-color:#3d4758;
 }
 
 .exercise-image{
+  height:220px;
   width:100%;
-  height:190px;
   object-fit:cover;
+  background:#11151b;
   display:block;
-  background:#202633;
-}
-
-.image-fallback{
-  height:190px;
-  background:linear-gradient(135deg,#171c25,#293241);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--accent);
-  font-size:22px;
-  font-weight:800;
 }
 
 .exercise-body{
   padding:16px;
 }
 
-.exercise h3{
-  font-size:18px;
-  margin-bottom:7px;
+.exercise-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
 }
 
-.meta{
+.exercise-name{
+  font-size:20px;
+  font-weight:800;
+}
+
+.favorite{
+  border:0;
+  background:transparent;
+  color:#7e8794;
+  font-size:25px;
+  padding:0;
+}
+
+.favorite.active{
+  color:#ffcc45;
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:12px 0;
+}
+
+.tag{
+  padding:5px 9px;
+  border-radius:20px;
+  background:var(--card2);
+  color:var(--muted);
+  font-size:12px;
+}
+
+.exercise-info{
+  display:flex;
+  justify-content:space-between;
   color:var(--muted);
   font-size:13px;
-  line-height:1.6;
-}
-
-.sets{
-  margin-top:10px;
-  font-weight:700;
-  font-size:13px;
-}
-
-.desc{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.55;
-  margin-top:9px;
+  margin-bottom:15px;
 }
 
 .actions{
   display:flex;
   gap:8px;
-  margin-top:13px;
-  flex-wrap:wrap;
 }
 
-.actions button{
-  font-size:13px;
-  padding:9px 12px;
+.btn{
+  flex:1;
+  border:0;
+  border-radius:10px;
+  padding:11px 10px;
+  font-weight:700;
 }
 
-.favorite{
-  background:#303744;
-  color:white;
+.btn-primary{
+  background:var(--accent);
+  color:#071007;
 }
 
-.workout-item{
-  background:var(--card);
+.btn-secondary{
+  background:var(--card2);
+  color:var(--text);
   border:1px solid var(--line);
-  border-radius:13px;
-  padding:15px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:10px;
 }
 
-.workout-item small{
-  color:var(--muted);
+.btn-danger{
+  background:rgba(255,98,98,.12);
+  color:var(--danger);
+  border:1px solid rgba(255,98,98,.25);
 }
 
 .empty{
+  text-align:center;
+  padding:45px 15px;
   color:var(--muted);
-  padding:20px 0;
+  border:1px dashed var(--line);
+  border-radius:15px;
+}
+
+.workout-box{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.workout-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:15px 18px;
+  border-bottom:1px solid var(--line);
+}
+
+.workout-item:last-child{
+  border-bottom:0;
+}
+
+.workout-item-info{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.workout-thumb{
+  width:55px;
+  height:55px;
+  border-radius:10px;
+  object-fit:cover;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.stat{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:20px;
+}
+
+.stat-number{
+  font-size:30px;
+  font-weight:900;
+  color:var(--accent);
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.progress-box{
+  margin-top:25px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:20px;
+}
+
+.progress-form{
+  display:grid;
+  grid-template-columns:1fr 1fr auto;
+  gap:10px;
+  margin-top:15px;
+}
+
+.progress-form input{
+  background:var(--card2);
+  border:1px solid var(--line);
+  color:var(--text);
+  padding:12px;
+  border-radius:10px;
+}
+
+.progress-list{
+  margin-top:18px;
+}
+
+.progress-row{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid var(--line);
+  color:var(--muted);
+}
+
+.timer{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:var(--card2);
+  border:1px solid var(--line);
+  padding:16px;
+  border-radius:15px;
+  display:none;
+  z-index:200;
+  box-shadow:0 10px 40px rgba(0,0,0,.4);
+}
+
+.timer.show{
+  display:block;
+}
+
+.timer-number{
+  font-size:34px;
+  font-weight:900;
+  color:var(--accent);
+  text-align:center;
+}
+
+.timer-buttons{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.timer-buttons button{
+  background:var(--card);
+  color:var(--text);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:8px 12px;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:300;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(650px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:20px;
+  position:relative;
+}
+
+.modal-close{
+  position:absolute;
+  top:12px;
+  right:15px;
+  background:transparent;
+  color:var(--text);
+  border:0;
+  font-size:28px;
+}
+
+.modal img{
+  width:100%;
+  max-height:320px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:18px;
+}
+
+.modal h2{
+  margin-bottom:10px;
+}
+
+.modal p{
+  color:var(--muted);
+  margin-bottom:10px;
 }
 
 footer{
   text-align:center;
+  padding:40px 20px;
   color:var(--muted);
   border-top:1px solid var(--line);
-  padding:25px;
-  font-size:13px;
+  margin-top:40px;
 }
 
-@media(max-width:650px){
-
-  nav{
-    padding:12px;
+@media(max-width:900px){
+  .muscles{
+    grid-template-columns:repeat(3,1fr);
   }
 
-  .navlinks{
-    gap:12px;
-    font-size:12px;
+  .exercise-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  main{
-    padding:18px 12px 50px;
-  }
-
-  .hero{
-    padding-top:28px;
-  }
-
-  .searchbox{
-    flex-direction:column;
-  }
-
-  .searchbox button{
-    width:100%;
-  }
-
-  .exercises{
+  .filters{
     grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:600px){
+  .nav{
+    padding:13px 15px;
+  }
+
+  .nav-links{
     gap:10px;
   }
 
-  .exercise-image{
-    height:135px;
+  .hero{
+    padding:50px 0 30px;
   }
 
-  .image-fallback{
-    height:135px;
+  .container{
+    padding:0 14px;
   }
 
-  .exercise-body{
-    padding:11px;
+  .muscles{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .exercise h3{
-    font-size:15px;
-  }
-
-  .meta,
-  .desc,
-  .sets{
-    font-size:11px;
-  }
-
-  .actions{
-    flex-direction:column;
-  }
-
-  .actions button{
-    width:100%;
-  }
-}
-
-@media(max-width:400px){
-
-  .exercises{
+  .exercise-grid{
     grid-template-columns:1fr;
   }
 
-  .exercise-image,
-  .image-fallback{
-    height:190px;
+  .filters{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .progress-form{
+    grid-template-columns:1fr;
+  }
+
+  .exercise-image{
+    height:230px;
+  }
+
+  .workout-item{
+    align-items:flex-start;
   }
 }
 </style>
@@ -378,499 +573,560 @@ footer{
 <body>
 
 <header>
-<nav>
-  <div class="logo">Fit<span>ify</span></div>
+  <div class="nav">
+    <div class="logo">FITIFY</div>
 
-  <div class="navlinks">
-    <a href="#exercises">Exercises</a>
-    <a href="#workout">Workout</a>
+    <div class="nav-links">
+      <a href="#exercises">Exercises</a>
+      <a href="#workout">My Workout</a>
+    </div>
   </div>
-</nav>
 </header>
 
 <main>
 
 <section class="hero">
-  <h1>
-    Train smarter.<br>
-    <span>Get stronger.</span>
-  </h1>
+  <div class="container">
+    <h1>Train smarter.<br><span>Get stronger.</span></h1>
 
-  <p>
-    Explore exercises by muscle group, equipment and difficulty.
-    Build your workout with Fitify.
-  </p>
+    <p>
+      Discover exercises, build your workout and track your progress with Fitify.
+    </p>
 
-  <div class="searchbox">
-    <input
-      id="search"
-      type="search"
-      placeholder="Search exercises, e.g. bench press"
-      oninput="filterExercises()"
-    >
-
-    <button onclick="filterExercises()">Search</button>
+    <div class="search-box">
+      <input
+        type="text"
+        id="heroSearch"
+        placeholder="Search exercises..."
+      >
+    </div>
   </div>
 </section>
 
 
 <section class="section">
+  <div class="container">
 
-  <div class="section-title">
-    <h2>Muscle Groups</h2>
+    <div class="section-title">
+      <h2>Muscle Groups</h2>
+    </div>
+
+    <div class="muscles">
+
+      <button class="muscle" onclick="filterMuscle('Chest')">
+        <strong>Chest</strong>
+        <span class="muted">2 exercises</span>
+      </button>
+
+      <button class="muscle" onclick="filterMuscle('Back')">
+        <strong>Back</strong>
+        <span class="muted">2 exercises</span>
+      </button>
+
+      <button class="muscle" onclick="filterMuscle('Shoulders')">
+        <strong>Shoulders</strong>
+        <span class="muted">2 exercises</span>
+      </button>
+
+      <button class="muscle" onclick="filterMuscle('Biceps')">
+        <strong>Biceps</strong>
+        <span class="muted">1 exercise</span>
+      </button>
+
+      <button class="muscle" onclick="filterMuscle('Triceps')">
+        <strong>Triceps</strong>
+        <span class="muted">1 exercise</span>
+      </button>
+
+      <button class="muscle" onclick="filterMuscle('Legs')">
+        <strong>Legs</strong>
+        <span class="muted">2 exercises</span>
+      </button>
+
+      <button class="muscle" onclick="filterMuscle('Abs')">
+        <strong>Abs</strong>
+        <span class="muted">1 exercise</span>
+      </button>
+
+      <button class="muscle" onclick="filterMuscle('Calves')">
+        <strong>Calves</strong>
+        <span class="muted">1 exercise</span>
+      </button>
+
+    </div>
+
   </div>
-
-  <div class="muscles" id="muscles"></div>
-
 </section>
 
 
 <section class="section" id="exercises">
+  <div class="container">
 
-  <div class="section-title">
-    <h2>Exercise Library</h2>
+    <div class="section-title">
+      <div>
+        <h2>Exercise Library</h2>
+        <div class="muted" id="resultCount"></div>
+      </div>
+    </div>
 
-    <button onclick="showAll()">All</button>
+    <div class="filters">
+
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Search by exercise name..."
+      >
+
+      <select id="equipmentFilter">
+        <option value="">All Equipment</option>
+        <option value="Barbell">Barbell</option>
+        <option value="Dumbbell">Dumbbell</option>
+        <option value="Cable">Cable</option>
+        <option value="Bodyweight">Bodyweight</option>
+      </select>
+
+      <select id="difficultyFilter">
+        <option value="">All Levels</option>
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+      </select>
+
+      <select id="sortFilter">
+        <option value="default">Default</option>
+        <option value="az">A-Z</option>
+        <option value="za">Z-A</option>
+      </select>
+
+    </div>
+
+    <div class="exercise-grid" id="exerciseGrid"></div>
+
   </div>
-
-  <div class="exercises" id="exerciseList"></div>
-
 </section>
 
 
 <section class="section" id="workout">
+  <div class="container">
 
-  <div class="section-title">
-    <h2>My Workout</h2>
+    <div class="section-title">
+      <div>
+        <h2>My Workout</h2>
+        <div class="muted">Your saved exercises</div>
+      </div>
+    </div>
 
-    <button onclick="clearWorkout()">Clear</button>
+    <div class="stats">
+
+      <div class="stat">
+        <div class="stat-number" id="workoutCount">0</div>
+        <div class="stat-label">Workout Exercises</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-number" id="favoriteCount">0</div>
+        <div class="stat-label">Favorites</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-number" id="progressCount">0</div>
+        <div class="stat-label">Progress Entries</div>
+      </div>
+
+    </div>
+
+    <div class="workout-box" id="workoutList"></div>
+
+    <div class="progress-box">
+
+      <h3>Progress Tracker</h3>
+      <p class="muted">
+        Save your workout progress.
+      </p>
+
+      <div class="progress-form">
+
+        <input
+          type="text"
+          id="progressExercise"
+          placeholder="Exercise name"
+        >
+
+        <input
+          type="text"
+          id="progressValue"
+          placeholder="Example: 40 kg × 10"
+        >
+
+        <button class="btn btn-primary" onclick="saveProgress()">
+          Save
+        </button>
+
+      </div>
+
+      <div class="progress-list" id="progressList"></div>
+
+    </div>
+
   </div>
-
-  <div id="workoutList"></div>
-
 </section>
 
 </main>
 
 
 <footer>
-© 2026 Fitify • Your original exercise & workout companion
+  <p>© 2026 Fitify. Train smart. Stay consistent.</p>
 </footer>
+
+
+<!-- TIMER -->
+
+<div class="timer" id="timer">
+
+  <div class="timer-number" id="timerNumber">
+    60
+  </div>
+
+  <div class="timer-buttons">
+
+    <button onclick="startTimer(60)">
+      60s
+    </button>
+
+    <button onclick="startTimer(90)">
+      90s
+    </button>
+
+    <button onclick="stopTimer()">
+      Stop
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="exerciseModal">
+
+  <div class="modal-box">
+
+    <button class="modal-close" onclick="closeModal()">
+      ×
+    </button>
+
+    <img id="modalImage" src="" alt="Exercise">
+
+    <h2 id="modalTitle"></h2>
+
+    <p id="modalDescription"></p>
+
+    <div class="tags">
+      <span class="tag" id="modalMuscle"></span>
+      <span class="tag" id="modalEquipment"></span>
+      <span class="tag" id="modalDifficulty"></span>
+      <span class="tag" id="modalSets"></span>
+    </div>
+
+    <button
+      class="btn btn-primary"
+      onclick="addCurrentModalWorkout()"
+    >
+      + Add to My Workout
+    </button>
+
+  </div>
+
+</div>
 
 
 <script>
 
+/* =========================================================
+   EXERCISE DATA
+   ALL IMAGES ARE LOADED FROM INTERNET
+   NO LOCAL IMAGE FILE REQUIRED
+   ========================================================= */
+
 const exercises = [
 
-{
-name:"Bench Press",
-muscle:"Chest",
-equipment:"Barbell",
-level:"Intermediate",
-sets:"3 × 8–12",
-image:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=900&q=80",
-desc:"Press the bar from your chest while keeping your body stable."
-},
+  {
+    id:1,
+    name:"Bench Press",
+    muscle:"Chest",
+    equipment:"Barbell",
+    difficulty:"Intermediate",
+    sets:"3 × 8–12",
 
-{
-name:"Push-Up",
-muscle:"Chest",
-equipment:"Bodyweight",
-level:"Beginner",
-sets:"3 × 8–15",
-image:"push-up-4747.jpg",
-desc:"Keep your body in a straight line and lower your chest with control."
-},
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Bench%20press.webp",
 
-{
-name:"Lat Pulldown",
-muscle:"Back",
-equipment:"Cable",
-level:"Beginner",
-sets:"3 × 8–12",
-image:"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80",
-desc:"Pull the bar toward your upper chest with control."
-},
+    description:
+      "A barbell pressing exercise that primarily trains the chest, with the shoulders and triceps also involved."
+  },
 
-{
-name:"Barbell Row",
-muscle:"Back",
-equipment:"Barbell",
-level:"Intermediate",
-sets:"3 × 8–12",
-image:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=80",
-desc:"Hinge at the hips and pull the bar toward your torso."
-},
+  {
+    id:2,
+    name:"Push-Up",
+    muscle:"Chest",
+    equipment:"Bodyweight",
+    difficulty:"Beginner",
+    sets:"3 × 8–15",
 
-{
-name:"Shoulder Press",
-muscle:"Shoulders",
-equipment:"Dumbbell",
-level:"Intermediate",
-sets:"3 × 8–12",
-image:"https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=900&q=80",
-desc:"Press the dumbbells overhead while maintaining control."
-},
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Push-up.jpg",
 
-{
-name:"Lateral Raise",
-muscle:"Shoulders",
-equipment:"Dumbbell",
-level:"Beginner",
-sets:"3 × 12–15",
-image:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=80",
-desc:"Raise the dumbbells out to your sides with control."
-},
+    description:
+      "A bodyweight pressing exercise that works the chest, shoulders and triceps."
+  },
 
-{
-name:"Biceps Curl",
-muscle:"Biceps",
-equipment:"Dumbbell",
-level:"Beginner",
-sets:"3 × 10–15",
-image:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=900&q=80",
-desc:"Curl the weights while keeping your elbows stable."
-},
+  {
+    id:3,
+    name:"Lat Pulldown",
+    muscle:"Back",
+    equipment:"Cable",
+    difficulty:"Beginner",
+    sets:"3 × 8–12",
 
-{
-name:"Triceps Pushdown",
-muscle:"Triceps",
-equipment:"Cable",
-level:"Beginner",
-sets:"3 × 10–15",
-image:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=900&q=80",
-desc:"Extend your elbows while keeping your upper arms stable."
-},
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Amer-Lat-Pulldown.jpg",
 
-{
-name:"Goblet Squat",
-muscle:"Legs",
-equipment:"Dumbbell",
-level:"Beginner",
-sets:"3 × 8–12",
-image:"https://images.unsplash.com/photo-1574680178050-55c6a6c96e8f?auto=format&fit=crop&w=900&q=80",
-desc:"Squat with a dumbbell held close to your chest."
-},
+    description:
+      "A cable pulling exercise that primarily trains the latissimus dorsi and upper back."
+  },
 
-{
-name:"Romanian Deadlift",
-muscle:"Legs",
-equipment:"Barbell",
-level:"Intermediate",
-sets:"3 × 8–12",
-image:"https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=900&q=80",
-desc:"Hinge at the hips and keep your back neutral."
-},
+  {
+    id:4,
+    name:"Barbell Row",
+    muscle:"Back",
+    equipment:"Barbell",
+    difficulty:"Intermediate",
+    sets:"3 × 8–12",
 
-{
-name:"Plank",
-muscle:"Abs",
-equipment:"Bodyweight",
-level:"Beginner",
-sets:"3 × 20–60 sec",
-image:"https://images.unsplash.com/photo-1566241142559-40e1dab266c6?auto=format&fit=crop&w=900&q=80",
-desc:"Brace your core and maintain a straight body position."
-},
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Barbell%20row.jpg",
 
-{
-name:"Calf Raise",
-muscle:"Calves",
-equipment:"Bodyweight",
-level:"Beginner",
-sets:"3 × 12–20",
-image:"https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80",
-desc:"Rise onto your toes slowly and lower with control."
-}
+    description:
+      "A barbell pulling exercise that trains the upper and middle back."
+  },
+
+  {
+    id:5,
+    name:"Shoulder Press",
+    muscle:"Shoulders",
+    equipment:"Dumbbell",
+    difficulty:"Intermediate",
+    sets:"3 × 8–12",
+
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Dumbbell-shoulder-press-1.png",
+
+    description:
+      "An overhead pressing movement that primarily trains the shoulders."
+  },
+
+  {
+    id:6,
+    name:"Lateral Raise",
+    muscle:"Shoulders",
+    equipment:"Dumbbell",
+    difficulty:"Beginner",
+    sets:"3 × 12–15",
+
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Dumbbell-lateral-raises-1.png",
+
+    description:
+      "A shoulder isolation exercise involving raising dumbbells out to the sides."
+  },
+
+  {
+    id:7,
+    name:"Biceps Curl",
+    muscle:"Biceps",
+    equipment:"Dumbbell",
+    difficulty:"Beginner",
+    sets:"3 × 10–15",
+
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Bicep%20Curl.jpg",
+
+    description:
+      "A classic curling movement designed to train the biceps."
+  },
+
+  {
+    id:8,
+    name:"Triceps Pushdown",
+    muscle:"Triceps",
+    equipment:"Cable",
+    difficulty:"Beginner",
+    sets:"3 × 10–15",
+
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Triceps-pushdown-with-rope-2.gif",
+
+    description:
+      "A cable exercise that focuses on the triceps by extending the elbow."
+  },
+
+  {
+    id:9,
+    name:"Goblet Squat",
+    muscle:"Legs",
+    equipment:"Dumbbell",
+    difficulty:"Beginner",
+    sets:"3 × 8–12",
+
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Kettlebell%20Goblet%20Squat%20webm",
+
+    description:
+      "A squat variation performed while holding a weight close to the chest."
+  },
+
+  {
+    id:10,
+    name:"Romanian Deadlift",
+    muscle:"Legs",
+    equipment:"Barbell",
+    difficulty:"Intermediate",
+    sets:"3 × 8–12",
+
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Romanian-deadlift-1.png",
+
+    description:
+      "A hip-hinge exercise that trains the hamstrings, glutes and posterior chain."
+  },
+
+  {
+    id:11,
+    name:"Plank",
+    muscle:"Abs",
+    equipment:"Bodyweight",
+    difficulty:"Beginner",
+    sets:"3 × 20–60 sec",
+
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Plank.jpg",
+
+    description:
+      "An isometric core exercise that develops trunk stability."
+  },
+
+  {
+    id:12,
+    name:"Calf Raise",
+    muscle:"Calves",
+    equipment:"Bodyweight",
+    difficulty:"Beginner",
+    sets:"3 × 12–20",
+
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/DumbbellStandingCalfRaise.JPG",
+
+    description:
+      "A calf exercise performed by raising the heels and controlling the lowering phase."
+  }
 
 ];
 
 
+/* =========================================================
+   LOCAL STORAGE
+   ========================================================= */
+
 let workout =
-JSON.parse(localStorage.getItem("fitifyWorkout") || "[]");
+  JSON.parse(localStorage.getItem("fitifyWorkout")) || [];
 
+let favorites =
+  JSON.parse(localStorage.getItem("fitifyFavorites")) || [];
 
-const groups =
-[...new Set(exercises.map(e => e.muscle))];
+let progress =
+  JSON.parse(localStorage.getItem("fitifyProgress")) || [];
 
+let currentModalExercise = null;
 
-function renderMuscles(){
+let timerInterval = null;
 
-  document.getElementById("muscles").innerHTML =
-    groups.map(group => {
 
-      const count =
-        exercises.filter(e => e.muscle === group).length;
+/* =========================================================
+   SAVE DATA
+   ========================================================= */
 
-      return `
-        <div class="muscle"
-             onclick="filterBy('${group}')">
-
-          <b>${group}</b>
-          <small>${count} exercises</small>
-
-        </div>
-      `;
-
-    }).join("");
-}
-
-
-function render(list = exercises){
-
-  const container =
-    document.getElementById("exerciseList");
-
-  if(!list.length){
-
-    container.innerHTML =
-      `<div class="empty">No exercises found.</div>`;
-
-    return;
-  }
-
-
-  container.innerHTML =
-    list.map((e,index) => {
-
-      return `
-
-      <article class="exercise">
-
-        <img
-          class="exercise-image"
-          src="${e.image}"
-          alt="${e.name} exercise"
-          loading="lazy"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-        >
-
-        <div
-          class="image-fallback"
-          style="display:none"
-        >
-          ${e.name}
-        </div>
-
-
-        <div class="exercise-body">
-
-          <h3>${e.name}</h3>
-
-          <div class="meta">
-            ${e.muscle} • ${e.equipment} • ${e.level}
-          </div>
-
-          <div class="sets">
-            ${e.sets}
-          </div>
-
-          <div class="desc">
-            ${e.desc}
-          </div>
-
-          <div class="actions">
-
-            <button onclick="addWorkout(${index})">
-              Add
-            </button>
-
-            <button
-              class="favorite"
-              onclick="favorite('${e.name}')"
-            >
-              ★ Favorite
-            </button>
-
-          </div>
-
-        </div>
-
-      </article>
-
-      `;
-
-    }).join("");
-}
-
-
-function filterBy(group){
-
-  const result =
-    exercises.filter(e => e.muscle === group);
-
-  render(result);
-
-  document
-    .getElementById("exercises")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-}
-
-
-function filterExercises(){
-
-  const q =
-    document
-      .getElementById("search")
-      .value
-      .toLowerCase()
-      .trim();
-
-
-  if(!q){
-
-    render(exercises);
-    return;
-  }
-
-
-  const result =
-    exercises.filter(e =>
-      e.name.toLowerCase().includes(q) ||
-      e.muscle.toLowerCase().includes(q) ||
-      e.equipment.toLowerCase().includes(q) ||
-      e.level.toLowerCase().includes(q)
-    );
-
-
-  render(result);
-}
-
-
-function showAll(){
-
-  document.getElementById("search").value = "";
-
-  render(exercises);
-
-  document
-    .getElementById("exercises")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-}
-
-
-function addWorkout(index){
-
-  const exercise = exercises[index];
-
-  if(!workout.includes(exercise.name)){
-
-    workout.push(exercise.name);
-
-    saveWorkout();
-
-    renderWorkout();
-
-  }else{
-
-    alert(exercise.name + " is already in My Workout.");
-
-  }
-}
-
-
-function removeWorkout(name){
-
-  workout =
-    workout.filter(item => item !== name);
-
-  saveWorkout();
-
-  renderWorkout();
-}
-
-
-function clearWorkout(){
-
-  workout = [];
-
-  saveWorkout();
-
-  renderWorkout();
-}
-
-
-function saveWorkout(){
+function saveData(){
 
   localStorage.setItem(
     "fitifyWorkout",
     JSON.stringify(workout)
   );
-}
 
+  localStorage.setItem(
+    "fitifyFavorites",
+    JSON.stringify(favorites)
+  );
 
-function renderWorkout(){
-
-  const box =
-    document.getElementById("workoutList");
-
-
-  if(!workout.length){
-
-    box.innerHTML =
-      `<div class="empty">
-        Your workout is empty. Add exercises from the library.
-      </div>`;
-
-    return;
-  }
-
-
-  box.innerHTML =
-    workout.map(name => {
-
-      const ex =
-        exercises.find(e => e.name === name);
-
-      return `
-
-        <div class="workout-item">
-
-          <div>
-
-            <b>${name}</b><br>
-
-            <small>
-              ${ex ? ex.muscle + " • " + ex.sets : ""}
-            </small>
-
-          </div>
-
-          <button
-            onclick="removeWorkout('${name}')"
-            style="background:#ff6262;color:white"
-          >
-            Remove
-          </button>
-
-        </div>
-
-      `;
-
-    }).join("");
-}
-
-
-function favorite(name){
-
-  alert(
-    name +
-    " saved as a favorite in this demo."
+  localStorage.setItem(
+    "fitifyProgress",
+    JSON.stringify(progress)
   );
 
 }
 
 
-renderMuscles();
+/* =========================================================
+   RENDER EXERCISES
+   ========================================================= */
 
-render();
+function renderExercises(){
 
-renderWorkout();
+  const grid =
+    document.getElementById("exerciseGrid");
 
-</script>
+  const search =
+    document.getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
 
-</body>
-</html>
+  const equipment =
+    document.getElementById("equipmentFilter").value;
+
+  const difficulty =
+    document.getElementById("difficultyFilter").value;
+
+  const sort =
+    document.getElementById("sortFilter").value;
+
+
+  let filtered = exercises.filter(exercise => {
+
+    const matchesSearch =
+      exercise.name.toLowerCase().includes(search) ||
+      exercise.muscle.toLowerCase().includes(search) ||
+      exercise.equipment.toLowerCase().includes(search);
+
+    const matchesEquipment =
+      !equipment ||
+      exercise.equipment === equipment;
+
+    const matchesDifficulty =
+      !difficulty ||
+      exercise.difficulty === difficulty;
+
+    return (
+      matchesSearch &&
+      matchesEquipment &&
+      matchesDifficulty
+    );
+
+  });
+
+
+  if(sort === "az"){
+
+    filtered.sort((a,b) =>
+      a.name.localeCompare(b.name)
+    );
+
+  }
+
+  if(sort === "za"){
+
+    filtered.sort((a,b) =>
+      b.name.localeCompare(a.name)
+    );
+
+  }
+
+
+  document.
