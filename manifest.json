@@ -16,5 +16,15 @@
       "sizes": "512x512",
       "type": "image/png"
     }
+  ],
+  "id": "index.html",
+  "description": "Fitify - Daily Workout and Fitness Tracker App)",
+  "lang": "en",
+  "categories": [
+    "fitness",
+    "health",
+    "health &amp; fitness",
+    "lifestyle",
+    "sports"
   ]
 }
