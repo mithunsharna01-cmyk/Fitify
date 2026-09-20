@@ -7,13 +7,8 @@
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "https://mithunsharma01-cmyk.github.io/Fitify/192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "https://mithunsharma01-cmyk.github.io/Fitify/512x512.png",
-      "sizes": "512x512",
+      "src": "https://gstatic.com/images/branding/product/2x/dumbbells_96dp.png",
+      "sizes": "192x192 512x512",
       "type": "image/png"
     }
   ],
