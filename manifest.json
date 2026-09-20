@@ -3,14 +3,21 @@
   "short_name": "Fitify",
   "start_url": "https://mithunsharma01-cmyk.github.io/Fitify/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#000000",
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "https://mithunsharma01-cmyk.github.io/Fitify/icon.png",
+      "src": "https://mithunsharma01-cmyk.github.io/Fitify/192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://mithunsharma01-cmyk.github.io/Fitify/512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "description": "Fitify is a simple and effective fitness app designed to help you track workouts, stay active, and achieve your daily health goals.\""
+  "id": "index.html",
+  "description": "Fitify - Daily Workout and Fitness Tracker App",
+  "lang": "en"
 }
