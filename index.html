@@ -51,34 +51,98 @@ footer{text-align:center;color:var(--muted);border-top:1px solid var(--line);pad
 <footer>© 2026 Fitify • Your original exercise & workout companion</footer>
 
 <script>
-const exercises=[
-{name:"Bench Press",muscle:"Chest",equipment:"Barbell",level:"Intermediate",sets:"3–4 × 8–12",desc:"Press the bar from your chest while keeping your shoulders controlled."},
-{name:"Push-Up",muscle:"Chest",equipment:"Bodyweight",level:"Beginner",sets:"3 × 8–15",desc:"Keep your body in a straight line and lower your chest with control,image:"push-up-4747.jpg."},
-{name:"Lat Pulldown",muscle:"Back",equipment:"Cable",level:"Beginner",sets:"3 × 8–12",desc:"Pull the bar toward your upper chest without swinging your body."},
-{name:"Barbell Row",muscle:"Back",equipment:"Barbell",level:"Intermediate",sets:"3 × 8–12",desc:"Hinge at the hips and pull the bar toward your torso."},
-{name:"Shoulder Press",muscle:"Shoulders",equipment:"Dumbbell",level:"Intermediate",sets:"3 × 8–12",desc:"Press dumbbells overhead while keeping your core stable."},
-{name:"Lateral Raise",muscle:"Shoulders",equipment:"Dumbbell",level:"Beginner",sets:"3 × 12–15",desc:"Raise the dumbbells out to your sides with controlled movement."},
-{name:"Biceps Curl",muscle:"Biceps",equipment:"Dumbbell",level:"Beginner",sets:"3 × 10–15",desc:"Curl the weights without swinging your elbows forward."},
-{name:"Triceps Pushdown",muscle:"Triceps",equipment:"Cable",level:"Beginner",sets:"3 × 10–15",desc:"Extend your elbows while keeping your upper arms stable."},
-{name:"Goblet Squat",muscle:"Legs",equipment:"Dumbbell",level:"Beginner",sets:"3 × 8–12",desc:"Squat with a dumbbell held at your chest and keep your knees controlled."},
-{name:"Romanian Deadlift",muscle:"Legs",equipment:"Barbell",level:"Intermediate",sets:"3 × 8–12",desc:"Hinge at the hips and lower the weight while keeping a neutral back."},
-{name:"Plank",muscle:"Abs",equipment:"Bodyweight",level:"Beginner",sets:"3 × 20–60 sec",desc:"Brace your core and maintain a straight line from head to heels."},
-{name:"Calf Raise",muscle:"Calves",equipment:"Bodyweight",level:"Beginner",sets:"3 × 12–20",desc:"Rise onto your toes slowly and lower with control."}
+const exercises = [
+{name:"Bench Press",muscle:"Chest",equipment:"Barbell",level:"Intermediate",sets:"3-4 × 8-12",desc:"Press the bar from your chest while keeping your body stable."},
+{name:"Push-Up",muscle:"Chest",equipment:"Bodyweight",level:"Beginner",sets:"3 × 8-15",desc:"Keep your body in a straight line and lower your chest with control.",image:"push-up-4747.jpg"},
+{name:"Lat Pulldown",muscle:"Back",equipment:"Cable",level:"Beginner",sets:"3 × 8-12",desc:"Pull the bar toward your upper chest with control."},
+{name:"Barbell Row",muscle:"Back",equipment:"Barbell",level:"Intermediate",sets:"3 × 8-12",desc:"Hinge at the hips and pull the bar toward your torso."},
+{name:"Shoulder Press",muscle:"Shoulders",equipment:"Dumbbell",level:"Intermediate",sets:"3 × 8-12",desc:"Press the dumbbells overhead with control."},
+{name:"Lateral Raise",muscle:"Shoulders",equipment:"Dumbbell",level:"Beginner",sets:"3 × 12-15",desc:"Raise the dumbbells out to your sides with control."},
+{name:"Biceps Curl",muscle:"Biceps",equipment:"Dumbbell",level:"Beginner",sets:"3 × 10-15",desc:"Curl the weights while keeping your elbows stable."},
+{name:"Triceps Pushdown",muscle:"Triceps",equipment:"Cable",level:"Beginner",sets:"3 × 10-15",desc:"Extend your elbows while keeping your upper arms stable."},
+{name:"Goblet Squat",muscle:"Legs",equipment:"Dumbbell",level:"Beginner",sets:"3 × 8-12",desc:"Squat with a dumbbell held close to your chest."},
+{name:"Romanian Deadlift",muscle:"Legs",equipment:"Barbell",level:"Intermediate",sets:"3 × 8-12",desc:"Hinge at the hips and keep your back neutral."},
+{name:"Plank",muscle:"Abs",equipment:"Bodyweight",level:"Beginner",sets:"3 × 20-60 sec",desc:"Brace your core and maintain a straight body position."},
+{name:"Calf Raise",muscle:"Calves",equipment:"Bodyweight",level:"Beginner",sets:"3 × 12-20",desc:"Rise onto your toes slowly and lower with control."}
 ];
-let workout=JSON.parse(localStorage.getItem("fitifyWorkout")||"[]");
-const groups=[...new Set(exercises.map(e=>e.muscle))];
-document.getElementById("muscles").innerHTML=groups.map(g=>`<div class="muscle" onclick="filterBy('${g}')"><b>${g}</b><small>${exercises.filter(e=>e.muscle===g).length} exercises</small></div>`).join("");
-function render(list=exercises){document.getElementById("exerciseList").innerHTML=list.map(e=>`<article class="exercise"><div>${e.image?`<img src="${e.image}" alt="${e.name}" style="width:100%;height:180px;object-fit:cover;border-radius:12px;">`:''}</div><h3>${e.name}</h3><p>${e.muscle} • ${e.equipment} • ${e.level}</p><small>${e.sets}</small><button onclick="addWorkout('${e.name}')">Add</button><button onclick="fav('${e.name}')">Favorite</button></article>`).join("");}
-function filterBy(g){render(exercises.filter(e=>e.muscle===g));document.getElementById("exercises").scrollIntoView({behavior:"smooth"});}
-function filterExercises(){let q=document.getElementById("search").value.toLowerCase();render(exercises.filter(e=>(e.name+" "+e.muscle+" "+e.equipment).toLowerCase().includes(q)));}
-function showAll(){document.getElementById("search").value="";render();}
-function addWorkout(i){if(!workout.includes(i)){workout.push(i);save();renderWorkout();}}
-function clearWorkout(){workout=[];save();renderWorkout();}
-function save(){localStorage.setItem("fitifyWorkout",JSON.stringify(workout));}
-function renderWorkout(){document.getElementById("workoutList").innerHTML=workout.length?workout.map(i=>`<article class="exercise"><h3>${exercises[i].name}</h3><p>${exercises[i].muscle} • ${exercises[i].sets}</p><button class="fav" onclick="removeWorkout(${i})">Remove</button></article>`).join(""):"<p style='color:var(--muted)'>No exercises added yet. Add exercises from the library.</p>";}
-function removeWorkout(i){workout=workout.filter(x=>x!==i);save();renderWorkout();}
-function fav(n){alert(n+" saved as a favorite in this demo.");}
-render();renderWorkout();
+
+let workout = JSON.parse(localStorage.getItem("fitifyWorkout") || "[]");
+
+const groups = [...new Set(exercises.map(e => e.muscle))];
+
+document.getElementById("muscles").innerHTML =
+groups.map(g => `<div class="muscle" onclick="filterBy('${g}')"><b>${g}</b><small>${exercises.filter(e => e.muscle === g).length} exercises</small></div>`).join("");
+
+function render(list = exercises) {
+document.getElementById("exerciseList").innerHTML = list.map(e => `
+<article class="exercise">
+${e.image ? `<img src="${e.image}" alt="${e.name}" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin-bottom:10px;">` : ""}
+<h3>${e.name}</h3>
+<p>${e.muscle} • ${e.equipment} • ${e.level}</p>
+<small>${e.sets}</small>
+<p>${e.desc}</p>
+<button onclick="addWorkout('${e.name}')">Add</button>
+<button onclick="fav('${e.name}')">Favorite</button>
+</article>
+`).join("");
+}
+
+function filterBy(group) {
+render(exercises.filter(e => e.muscle === group));
+document.getElementById("exercises").scrollIntoView({behavior:"smooth"});
+}
+
+function filterExercises() {
+let q = document.getElementById("search").value.toLowerCase();
+render(exercises.filter(e =>
+e.name.toLowerCase().includes(q) ||
+e.muscle.toLowerCase().includes(q) ||
+e.equipment.toLowerCase().includes(q)
+));
+}
+
+function showAll() {
+document.getElementById("search").value = "";
+render();
+}
+
+function addWorkout(name) {
+if (!workout.includes(name)) {
+workout.push(name);
+save();
+renderWorkout();
+}
+}
+
+function clearWorkout() {
+workout = [];
+save();
+renderWorkout();
+}
+
+function save() {
+localStorage.setItem("fitifyWorkout", JSON.stringify(workout));
+}
+
+function renderWorkout() {
+document.getElementById("workoutList").innerHTML =
+workout.length
+? workout.map((name,i) => `<article class="exercise"><h3>${name}</h3><button onclick="removeWorkout(${i})">Remove</button></article>`).join("")
+: "<p>Your workout is empty.</p>";
+}
+
+function removeWorkout(i) {
+workout.splice(i,1);
+save();
+renderWorkout();
+}
+
+function fav(name) {
+alert(name + " saved as a favorite!");
+}
+
+render();
+renderWorkout();
 </script>
 </body>
 </html>
