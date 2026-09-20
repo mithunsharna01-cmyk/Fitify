@@ -3,18 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fitify - Fitness App</title>
+<title>Fitify - Premium Fitness App</title>
 <meta name="description" content="Fitify is an exercise and workout library with exercises by muscle group, equipment and difficulty.">
 <style>
 :root{
-  --bg:#090b0d;
-  --card:#151922;
-  --card2:#1c2230;
+  --bg:#0b0f17;
+  --card:#161c28;
+  --card-hover:#1f283a;
   --text:#f5f7fa;
-  --muted:#9ca6b5;
-  --accent:#5ee35d;
-  --line:#282f3a;
-  --danger:#ff6262;
+  --muted:#94a3b8;
+  --accent:#00e676;
+  --accent-glow:rgba(0, 230, 118, 0.25);
+  --line:#263248;
+  --danger:#ff4757;
 }
 
 *{
@@ -28,7 +29,7 @@ html{
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background:var(--bg);
   color:var(--text);
 }
@@ -42,23 +43,24 @@ header{
   position:sticky;
   top:0;
   z-index:100;
-  background:rgba(9,11,13,.96);
+  background:rgba(11, 15, 23, 0.85);
   border-bottom:1px solid var(--line);
-  backdrop-filter:blur(10px);
+  backdrop-filter:blur(12px);
 }
 
 nav{
   max-width:1150px;
   margin:auto;
-  padding:14px 18px;
+  padding:16px 20px;
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
 
 .logo{
-  font-size:24px;
-  font-weight:800;
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:-0.5px;
 }
 
 .logo span{
@@ -69,6 +71,7 @@ nav{
   display:flex;
   gap:20px;
   font-size:14px;
+  font-weight:600;
   color:var(--muted);
 }
 
@@ -83,62 +86,71 @@ main{
 }
 
 .hero{
-  padding:25px 0 20px;
+  padding:30px 0 20px;
 }
 
 .hero h1{
-  font-size:clamp(30px,6vw,54px);
+  font-size:clamp(32px, 6vw, 56px);
   line-height:1.1;
+  font-weight:800;
   margin-bottom:12px;
 }
 
 .hero h1 span{
   color:var(--accent);
+  background: linear-gradient(135deg, #00e676, #00b0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero p{
   color:var(--muted);
-  max-width:650px;
+  max-width:600px;
   line-height:1.6;
+  font-size:15px;
 }
 
 .searchbox{
   display:flex;
   gap:10px;
-  margin-top:20px;
+  margin-top:24px;
 }
 
 .searchbox input{
   flex:1;
-  padding:14px;
+  padding:15px 18px;
   border-radius:12px;
   border:1px solid var(--line);
-  background:#141923;
+  background:#121722;
   color:white;
   outline:none;
   font-size:15px;
+  transition:0.2s;
 }
 
 .searchbox input:focus{
   border-color:var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
 }
 
 button{
   border:0;
-  border-radius:10px;
-  padding:11px 15px;
+  border-radius:12px;
+  padding:12px 20px;
   background:var(--accent);
-  color:#061006;
+  color:#04140a;
   font-weight:700;
   cursor:pointer;
+  transition:0.2s;
 }
 
 button:hover{
-  filter:brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px var(--accent-glow);
 }
 
 .section{
-  margin-top:30px;
+  margin-top:35px;
 }
 
 .section-title{
@@ -146,79 +158,91 @@ button:hover{
   justify-content:space-between;
   align-items:center;
   gap:10px;
-  margin-bottom:15px;
+  margin-bottom:18px;
 }
 
 .section-title h2{
-  font-size:21px;
+  font-size:22px;
+  font-weight:700;
 }
 
 .muscles{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-  gap:10px;
+  grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));
+  gap:12px;
 }
 
 .muscle{
   background:var(--card);
   border:1px solid var(--line);
-  border-radius:13px;
-  padding:14px;
+  border-radius:14px;
+  padding:16px 12px;
   cursor:pointer;
-  transition:.2s;
+  transition:0.2s;
   text-align:center;
 }
 
 .muscle:hover, .muscle.active{
   border-color:var(--accent);
-  background:var(--card2);
-  transform:translateY(-2px);
+  background:var(--card-hover);
+  transform:translateY(-3px);
+  box-shadow: 0 4px 15px var(--accent-glow);
 }
 
 .muscle b{
   display:block;
-  margin-bottom:5px;
+  margin-bottom:4px;
+  font-size:15px;
 }
 
 .muscle small{
   color:var(--muted);
+  font-size:12px;
 }
 
 .exercises{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:15px;
+  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  gap:18px;
 }
 
 .exercise{
   background:var(--card);
   border:1px solid var(--line);
-  border-radius:15px;
+  border-radius:16px;
   overflow:hidden;
-  transition:.2s;
+  transition:0.3s;
   display:flex;
   flex-direction:column;
 }
 
 .exercise:hover{
-  transform:translateY(-3px);
-  border-color:#3b4658;
+  transform:translateY(-4px);
+  border-color:var(--accent);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 
 .clickable-area {
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 .exercise-image{
   width:100%;
-  height:180px;
+  height:190px;
   object-fit:cover;
   display:block;
-  background:#202633;
+  background:#182030;
+  transition: 0.3s;
+}
+
+.exercise:hover .exercise-image {
+  transform: scale(1.04);
 }
 
 .image-fallback{
-  height:180px;
+  height:190px;
   background:linear-gradient(135deg,#171c25,#293241);
   display:flex;
   align-items:center;
@@ -229,7 +253,7 @@ button:hover{
 }
 
 .exercise-body{
-  padding:16px;
+  padding:18px;
   flex:1;
   display:flex;
   flex-direction:column;
@@ -237,16 +261,23 @@ button:hover{
 
 .exercise h3{
   font-size:18px;
-  margin-bottom:5px;
+  margin-bottom:6px;
   color:var(--text);
+  font-weight:700;
 }
 
 .play-badge {
-  display:inline-block;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
   font-size:12px;
   color:var(--accent);
-  margin-bottom:8px;
-  font-weight:bold;
+  margin-bottom:10px;
+  font-weight:700;
+  background: var(--accent-glow);
+  padding: 4px 8px;
+  border-radius: 6px;
+  width: fit-content;
 }
 
 .meta{
@@ -256,7 +287,7 @@ button:hover{
 }
 
 .sets{
-  margin-top:8px;
+  margin-top:10px;
   font-weight:700;
   font-size:13px;
   color:var(--accent);
@@ -272,31 +303,36 @@ button:hover{
 
 .actions{
   display:flex;
-  gap:8px;
-  margin-top:14px;
+  gap:10px;
+  margin-top:16px;
 }
 
 .actions button{
   flex:1;
-  font-size:12px;
-  padding:9px 8px;
+  font-size:13px;
+  padding:10px;
+  border-radius:10px;
 }
 
 .favorite{
-  background:#303744;
+  background:#263248;
   color:white;
+}
+
+.favorite:hover{
+  background:#32425e;
 }
 
 .workout-item{
   background:var(--card);
   border:1px solid var(--line);
-  border-radius:13px;
-  padding:14px;
+  border-radius:14px;
+  padding:16px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 .workout-item small{
@@ -305,36 +341,41 @@ button:hover{
 
 .empty{
   color:var(--muted);
-  padding:20px 0;
+  padding:25px 0;
+  text-align:center;
+  font-size:15px;
 }
 
 footer{
   text-align:center;
   color:var(--muted);
   border-top:1px solid var(--line);
-  padding:25px;
+  padding:30px;
   font-size:13px;
 }
 
 @media(max-width:650px){
   .exercises{
     grid-template-columns:1fr 1fr;
-    gap:10px;
+    gap:12px;
   }
   .exercise-image, .image-fallback{
-    height:130px;
+    height:140px;
   }
   .exercise-body{
-    padding:10px;
+    padding:12px;
   }
   .actions{
     flex-direction:column;
   }
 }
 
-@media(max-width:400px){
+@media(max-width:420px){
   .exercises{
     grid-template-columns:1fr;
+  }
+  .exercise-image, .image-fallback{
+    height:190px;
   }
 }
 </style>
@@ -354,7 +395,7 @@ footer{
 <main>
 <section class="hero">
   <h1>Train smarter.<br><span>Get stronger.</span></h1>
-  <p>Muscle group choose karein aur kisi bhi exercise par tap karke uska tutorial video dekhein.</p>
+  <p>Muscle group choose karein aur kisi bhi exercise par tap karke uska YouTube video tutorial dekhein.</p>
 
   <div class="searchbox">
     <input id="search" type="search" placeholder="Search exercise (e.g. Bench Press)" oninput="filterExercises()">
@@ -380,7 +421,7 @@ footer{
 <section class="section" id="workout">
   <div class="section-title">
     <h2>My Workout Routine</h2>
-    <button onclick="clearWorkout()" style="background:var(--danger); color:white;">Clear</button>
+    <button onclick="clearWorkout()" style="background:var(--danger); color:white;">Clear All</button>
   </div>
   <div id="workoutList"></div>
 </section>
@@ -392,19 +433,123 @@ footer{
 
 <script>
 const exercises = [
-  { name:"Bench Press", muscle:"Chest", equipment:"Barbell", level:"Intermediate", sets:"3 × 8–12", image:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=900&q=80", desc:"Press the bar from your chest while keeping your body stable." },
-  { name:"Push-Up", muscle:"Chest", equipment:"Bodyweight", level:"Beginner", sets:"3 × 8–15", image:"https://images.unsplash.com/photo-1598971639058-fab3c3109a00?auto=format&fit=crop&w=900&q=80", desc:"Keep your body in a straight line and lower your chest with control." },
-  { name:"Incline Dumbbell Press", muscle:"Chest", equipment:"Dumbbell", level:"Intermediate", sets:"3 × 10–12", image:"https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?auto=format&fit=crop&w=900&q=80", desc:"Targets upper chest using an inclined bench." },
-  { name:"Lat Pulldown", muscle:"Back", equipment:"Cable", level:"Beginner", sets:"3 × 8–12", image:"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80", desc:"Pull the bar toward your upper chest with control." },
-  { name:"Barbell Row", muscle:"Back", equipment:"Barbell", level:"Intermediate", sets:"3 × 8–12", image:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=80", desc:"Hinge at the hips and pull the bar toward your torso." },
-  { name:"Shoulder Press", muscle:"Shoulders", equipment:"Dumbbell", level:"Intermediate", sets:"3 × 8–12", image:"https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=900&q=80", desc:"Press the dumbbells overhead while maintaining control." },
-  { name:"Lateral Raise", muscle:"Shoulders", equipment:"Dumbbell", level:"Beginner", sets:"3 × 12–15", image:"https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=900&q=80", desc:"Raise the dumbbells out to your sides with control." },
-  { name:"Biceps Curl", muscle:"Biceps", equipment:"Dumbbell", level:"Beginner", sets:"3 × 10–15", image:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=900&q=80", desc:"Curl the weights while keeping your elbows stable." },
-  { name:"Triceps Pushdown", muscle:"Triceps", equipment:"Cable", level:"Beginner", sets:"3 × 10–15", image:"https://images.unsplash.com/photo-1530822847156-5df6846166b3?auto=format&fit=crop&w=900&q=80", desc:"Extend your elbows while keeping your upper arms stable." },
-  { name:"Goblet Squat", muscle:"Legs", equipment:"Dumbbell", level:"Beginner", sets:"3 × 8–12", image:"https://images.unsplash.com/photo-1574680178050-55c6a6c96e8f?auto=format&fit=crop&w=900&q=80", desc:"Squat with a dumbbell held close to your chest." },
-  { name:"Romanian Deadlift", muscle:"Legs", equipment:"Barbell", level:"Intermediate", sets:"3 × 8–12", image:"https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=900&q=80", desc:"Hinge at the hips and keep your back neutral." },
-  { name:"Plank", muscle:"Abs", equipment:"Bodyweight", level:"Beginner", sets:"3 × 20–60 sec", image:"https://images.unsplash.com/photo-1566241142559-40e1dab266c6?auto=format&fit=crop&w=900&q=80", desc:"Brace your core and maintain a straight body position." },
-  { name:"Calf Raise", muscle:"Calves", equipment:"Bodyweight", level:"Beginner", sets:"3 × 12–20", image:"https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80", desc:"Rise onto your toes slowly and lower with control." }
+  { 
+    name:"Bench Press", 
+    muscle:"Chest", 
+    equipment:"Barbell", 
+    level:"Intermediate", 
+    sets:"3 × 8–12", 
+    image:"https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80", 
+    desc:"Press the bar from your chest while keeping your core braced and feet flat." 
+  },
+  { 
+    name:"Push-Up", 
+    muscle:"Chest", 
+    equipment:"Bodyweight", 
+    level:"Beginner", 
+    sets:"3 × 8–15", 
+    image:"https://images.unsplash.com/photo-1598971639058-fab3c3109a00?auto=format&fit=crop&w=800&q=80", 
+    desc:"Keep your body in a straight line and lower your chest close to the floor." 
+  },
+  { 
+    name:"Incline Dumbbell Press", 
+    muscle:"Chest", 
+    equipment:"Dumbbell", 
+    level:"Intermediate", 
+    sets:"3 × 10–12", 
+    image:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80", 
+    desc:"Targets upper chest using an inclined bench press." 
+  },
+  { 
+    name:"Lat Pulldown", 
+    muscle:"Back", 
+    equipment:"Cable", 
+    level:"Beginner", 
+    sets:"3 × 8–12", 
+    image:"https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=800&q=80", 
+    desc:"Pull the wide bar down towards your upper chest while engaging your back." 
+  },
+  { 
+    name:"Barbell Row", 
+    muscle:"Back", 
+    equipment:"Barbell", 
+    level:"Intermediate", 
+    sets:"3 × 8–12", 
+    image:"https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?auto=format&fit=crop&w=800&q=80", 
+    desc:"Hinge at the hips with a flat back and pull the barbell toward your belly." 
+  },
+  { 
+    name:"Shoulder Press", 
+    muscle:"Shoulders", 
+    equipment:"Dumbbell", 
+    level:"Intermediate", 
+    sets:"3 × 8–12", 
+    image:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=800&q=80", 
+    desc:"Press the dumbbells straight overhead while maintaining a steady torso." 
+  },
+  { 
+    name:"Lateral Raise", 
+    muscle:"Shoulders", 
+    equipment:"Dumbbell", 
+    level:"Beginner", 
+    sets:"3 × 12–15", 
+    image:"https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80", 
+    desc:"Raise dumbbells out to your sides until shoulder height with control." 
+  },
+  { 
+    name:"Biceps Curl", 
+    muscle:"Biceps", 
+    equipment:"Dumbbell", 
+    level:"Beginner", 
+    sets:"3 × 10–15", 
+    image:"https://images.unsplash.com/photo-1581009137042-c552e485697a?auto=format&fit=crop&w=800&q=80", 
+    desc:"Curl weights toward your shoulders keeping elbows pinned to your sides." 
+  },
+  { 
+    name:"Triceps Pushdown", 
+    muscle:"Triceps", 
+    equipment:"Cable", 
+    level:"Beginner", 
+    sets:"3 × 10–15", 
+    image:"https://images.unsplash.com/photo-1530822847156-5df6846166b3?auto=format&fit=crop&w=800&q=80", 
+    desc:"Push cable attachment down fully extending your arms and squeezing triceps." 
+  },
+  { 
+    name:"Goblet Squat", 
+    muscle:"Legs", 
+    equipment:"Dumbbell", 
+    level:"Beginner", 
+    sets:"3 × 8–12", 
+    image:"https://images.unsplash.com/photo-1574680178050-55c6a6c96e8f?auto=format&fit=crop&w=800&q=80", 
+    desc:"Hold a dumbbell vertically at chest height and squat deep with knees out." 
+  },
+  { 
+    name:"Romanian Deadlift", 
+    muscle:"Legs", 
+    equipment:"Barbell", 
+    level:"Intermediate", 
+    sets:"3 × 8–12", 
+    image:"https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=800&q=80", 
+    desc:"Lower the weight by hinging hips back, feeling a stretch in your hamstrings." 
+  },
+  { 
+    name:"Plank", 
+    muscle:"Abs", 
+    equipment:"Bodyweight", 
+    level:"Beginner", 
+    sets:"3 × 20–60 sec", 
+    image:"https://images.unsplash.com/photo-1566241142559-40e1dab266c6?auto=format&fit=crop&w=800&q=80", 
+    desc:"Maintain a strict push-up or forearm plank position, squeezing core." 
+  },
+  { 
+    name:"Calf Raise", 
+    muscle:"Calves", 
+    equipment:"Bodyweight", 
+    level:"Beginner", 
+    sets:"3 × 12–20", 
+    image:"https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80", 
+    desc:"Rise high onto the balls of your feet slowly and control the downward path." 
+  }
 ];
 
 let workout = JSON.parse(localStorage.getItem("fitifyWorkout") || "[]");
@@ -436,7 +581,7 @@ function render(list = exercises){
     const originalIndex = exercises.findIndex(ex => ex.name === e.name);
     return `
       <article class="exercise">
-        <div class="clickable-area" onclick="openYouTube('${e.name}')" title="Click to watch ${e.name} video on YouTube">
+        <div class="clickable-area" onclick="openYouTube('${e.name}')" title="Click to watch video tutorial">
           <img 
             class="exercise-image" 
             src="${e.image}" 
@@ -450,7 +595,7 @@ function render(list = exercises){
         <div class="exercise-body">
           <div class="clickable-area" onclick="openYouTube('${e.name}')">
             <h3>${e.name}</h3>
-            <span class="play-badge">▶ Watch Video Guide</span>
+            <span class="play-badge">▶ Watch Tutorial</span>
           </div>
 
           <div class="meta">${e.muscle} • ${e.equipment} • ${e.level}</div>
@@ -458,7 +603,7 @@ function render(list = exercises){
           <div class="desc">${e.desc}</div>
 
           <div class="actions">
-            <button onclick="addWorkout(${originalIndex})">+ Add Routine</button>
+            <button onclick="addWorkout(${originalIndex})">+ Add</button>
             <button class="favorite" onclick="favorite('${e.name}')">★ Favorite</button>
           </div>
         </div>
