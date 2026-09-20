@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090b0d">
-
-<title>Fitify - Exercise & Workout</title>
-
-<meta name="description" content="Fitify - build workouts, track progress and train smarter.">
-
+<title>Fitify - Fitness App</title>
+<meta name="description" content="Fitify is an exercise and workout library with exercises by muscle group, equipment and difficulty.">
 <style>
 :root{
   --bg:#090b0d;
   --card:#151922;
+  --card2:#1c2230;
   --text:#f5f7fa;
   --muted:#9ca6b5;
   --accent:#5ee35d;
@@ -36,20 +33,16 @@ body{
   color:var(--text);
 }
 
-button,input,select{
-  font:inherit;
-}
-
-button{
-  border:0;
-  cursor:pointer;
+a{
+  color:inherit;
+  text-decoration:none;
 }
 
 header{
   position:sticky;
   top:0;
   z-index:100;
-  background:rgba(9,11,13,.97);
+  background:rgba(9,11,13,.96);
   border-bottom:1px solid var(--line);
   backdrop-filter:blur(10px);
 }
@@ -57,14 +50,14 @@ header{
 nav{
   max-width:1150px;
   margin:auto;
-  padding:13px 16px;
+  padding:14px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
 
 .logo{
-  font-size:23px;
+  font-size:24px;
   font-weight:800;
 }
 
@@ -74,14 +67,9 @@ nav{
 
 .navlinks{
   display:flex;
-  gap:18px;
+  gap:20px;
   font-size:14px;
   color:var(--muted);
-}
-
-.navlinks a{
-  color:inherit;
-  text-decoration:none;
 }
 
 .navlinks a:hover{
@@ -91,17 +79,17 @@ nav{
 main{
   max-width:1150px;
   margin:auto;
-  padding:24px 16px 70px;
+  padding:25px 16px 70px;
 }
 
 .hero{
-  padding:34px 0 22px;
+  padding:25px 0 20px;
 }
 
 .hero h1{
-  font-size:clamp(35px,7vw,64px);
-  line-height:1.04;
-  margin-bottom:14px;
+  font-size:clamp(30px,6vw,54px);
+  line-height:1.1;
+  margin-bottom:12px;
 }
 
 .hero h1 span{
@@ -117,47 +105,40 @@ main{
 .searchbox{
   display:flex;
   gap:10px;
-  margin-top:22px;
+  margin-top:20px;
 }
 
 .searchbox input{
   flex:1;
-  padding:15px;
-  border-radius:11px;
+  padding:14px;
+  border-radius:12px;
   border:1px solid var(--line);
   background:#141923;
-  color:#fff;
+  color:white;
   outline:none;
+  font-size:15px;
 }
 
 .searchbox input:focus{
   border-color:var(--accent);
 }
 
-.primary{
+button{
+  border:0;
+  border-radius:10px;
+  padding:11px 15px;
   background:var(--accent);
   color:#061006;
   font-weight:700;
-  padding:11px 15px;
-  border-radius:10px;
+  cursor:pointer;
 }
 
-.secondary{
-  background:#303744;
-  color:#fff;
-  padding:10px 13px;
-  border-radius:10px;
-}
-
-.danger{
-  background:var(--danger);
-  color:#fff;
-  padding:10px 13px;
-  border-radius:10px;
+button:hover{
+  filter:brightness(1.08);
 }
 
 .section{
-  margin-top:32px;
+  margin-top:30px;
 }
 
 .section-title{
@@ -165,7 +146,7 @@ main{
   justify-content:space-between;
   align-items:center;
   gap:10px;
-  margin-bottom:14px;
+  margin-bottom:15px;
 }
 
 .section-title h2{
@@ -174,47 +155,33 @@ main{
 
 .muscles{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(125px,1fr));
-  gap:9px;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:10px;
 }
 
 .muscle{
   background:var(--card);
   border:1px solid var(--line);
-  border-radius:12px;
+  border-radius:13px;
   padding:14px;
   cursor:pointer;
   transition:.2s;
+  text-align:center;
 }
 
-.muscle:hover,
-.muscle.active{
+.muscle:hover, .muscle.active{
   border-color:var(--accent);
+  background:var(--card2);
   transform:translateY(-2px);
 }
 
 .muscle b{
   display:block;
-  margin-bottom:6px;
+  margin-bottom:5px;
 }
 
 .muscle small{
   color:var(--muted);
-}
-
-.filters{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-bottom:15px;
-}
-
-.filters select{
-  background:var(--card);
-  color:#fff;
-  border:1px solid var(--line);
-  border-radius:9px;
-  padding:9px 11px;
 }
 
 .exercises{
@@ -226,14 +193,20 @@ main{
 .exercise{
   background:var(--card);
   border:1px solid var(--line);
-  border-radius:14px;
+  border-radius:15px;
   overflow:hidden;
   transition:.2s;
+  display:flex;
+  flex-direction:column;
 }
 
 .exercise:hover{
   transform:translateY(-3px);
   border-color:#3b4658;
+}
+
+.clickable-area {
+  cursor: pointer;
 }
 
 .exercise-image{
@@ -256,191 +229,83 @@ main{
 }
 
 .exercise-body{
-  padding:15px;
+  padding:16px;
+  flex:1;
+  display:flex;
+  flex-direction:column;
 }
 
 .exercise h3{
   font-size:18px;
-  margin-bottom:6px;
+  margin-bottom:5px;
+  color:var(--text);
 }
 
-.meta,
-.desc{
+.play-badge {
+  display:inline-block;
+  font-size:12px;
+  color:var(--accent);
+  margin-bottom:8px;
+  font-weight:bold;
+}
+
+.meta{
   color:var(--muted);
   font-size:13px;
-  line-height:1.55;
+  line-height:1.5;
 }
 
 .sets{
-  margin-top:9px;
+  margin-top:8px;
   font-weight:700;
   font-size:13px;
+  color:var(--accent);
 }
 
 .desc{
-  margin-top:7px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+  margin-top:8px;
+  flex:1;
 }
 
 .actions{
   display:flex;
-  gap:7px;
-  margin-top:12px;
-  flex-wrap:wrap;
+  gap:8px;
+  margin-top:14px;
 }
 
 .actions button{
+  flex:1;
   font-size:12px;
-  padding:9px 11px;
-  border-radius:9px;
+  padding:9px 8px;
 }
 
-.workout-box{
-  background:#0e1116;
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:14px;
+.favorite{
+  background:#303744;
+  color:white;
 }
 
 .workout-item{
   background:var(--card);
   border:1px solid var(--line);
-  border-radius:11px;
-  padding:13px;
+  border-radius:13px;
+  padding:14px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  margin-bottom:9px;
-}
-
-.workout-item:last-child{
-  margin-bottom:0;
+  margin-bottom:10px;
 }
 
 .workout-item small{
   color:var(--muted);
 }
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-
-.stat{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:16px;
-}
-
-.stat strong{
-  display:block;
-  font-size:25px;
-  color:var(--accent);
-}
-
-.stat small{
-  color:var(--muted);
-}
-
-.progress-form{
-  display:grid;
-  grid-template-columns:1fr 1fr auto;
-  gap:9px;
-}
-
-.progress-form input{
-  background:var(--card);
-  border:1px solid var(--line);
-  color:#fff;
-  border-radius:9px;
-  padding:11px;
-}
-
-.progress-list{
-  margin-top:12px;
-}
-
-.progress-row{
-  display:flex;
-  justify-content:space-between;
-  padding:11px 0;
-  border-bottom:1px solid var(--line);
-  color:var(--muted);
-}
-
-.progress-row b{
-  color:#fff;
-}
-
-.timer{
-  text-align:center;
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:22px;
-}
-
-.timer-display{
-  font-size:52px;
-  font-weight:800;
-  letter-spacing:2px;
-  margin:8px;
-}
-
-.timer-controls{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
 .empty{
   color:var(--muted);
-  padding:18px 0;
-}
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.72);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  z-index:300;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-card{
-  width:min(500px,100%);
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:20px;
-}
-
-.modal-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:15px;
-}
-
-.close{
-  background:#303744;
-  color:#fff;
-  border-radius:8px;
-  padding:7px 10px;
-}
-
-.modal-card p{
-  color:var(--muted);
-  line-height:1.6;
+  padding:20px 0;
 }
 
 footer{
@@ -452,1182 +317,251 @@ footer{
 }
 
 @media(max-width:650px){
-
-  nav{
-    padding:12px;
-  }
-
-  .navlinks{
-    gap:11px;
-    font-size:12px;
-  }
-
-  main{
-    padding:16px 12px 50px;
-  }
-
-  .hero{
-    padding-top:26px;
-  }
-
-  .searchbox{
-    flex-direction:column;
-  }
-
-  .searchbox button{
-    width:100%;
-  }
-
   .exercises{
     grid-template-columns:1fr 1fr;
-    gap:9px;
+    gap:10px;
   }
-
-  .exercise-image,
-  .image-fallback{
-    height:135px;
+  .exercise-image, .image-fallback{
+    height:130px;
   }
-
   .exercise-body{
     padding:10px;
   }
-
-  .exercise h3{
-    font-size:15px;
-  }
-
-  .meta,
-  .desc,
-  .sets{
-    font-size:11px;
-  }
-
   .actions{
     flex-direction:column;
-  }
-
-  .actions button{
-    width:100%;
-  }
-
-  .progress-form{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .progress-form button{
-    grid-column:1/-1;
-  }
-
-  .stats{
-    gap:7px;
-  }
-
-  .stat{
-    padding:12px;
-  }
-
-  .stat strong{
-    font-size:21px;
   }
 }
 
 @media(max-width:400px){
-
   .exercises{
     grid-template-columns:1fr;
-  }
-
-  .exercise-image,
-  .image-fallback{
-    height:190px;
   }
 }
 </style>
 </head>
-
 <body>
 
 <header>
-
 <nav>
-
-<div class="logo">
-Fit<span>ify</span>
-</div>
-
-<div class="navlinks">
-<a href="#exercises">Exercises</a>
-<a href="#workout">Workout</a>
-<a href="#progress">Progress</a>
-</div>
-
+  <div class="logo">Fit<span>ify</span></div>
+  <div class="navlinks">
+    <a href="#exercises">Exercises</a>
+    <a href="#workout">Workout</a>
+  </div>
 </nav>
-
 </header>
 
-
 <main>
-
 <section class="hero">
+  <h1>Train smarter.<br><span>Get stronger.</span></h1>
+  <p>Muscle group choose karein aur kisi bhi exercise par tap karke uska tutorial video dekhein.</p>
 
-<h1>
-Train smarter.<br>
-<span>Get stronger.</span>
-</h1>
-
-<p>
-Explore exercises, build your workout, use the rest timer
-and track your progress — all saved in your browser.
-</p>
-
-<div class="searchbox">
-
-<input
-id="search"
-type="search"
-placeholder="Search exercises, e.g. bench press"
-oninput="filterExercises()"
->
-
-<button
-class="primary"
-onclick="filterExercises()">
-Search
-</button>
-
-</div>
-
+  <div class="searchbox">
+    <input id="search" type="search" placeholder="Search exercise (e.g. Bench Press)" oninput="filterExercises()">
+    <button onclick="filterExercises()">Search</button>
+  </div>
 </section>
-
 
 <section class="section">
-
-<div class="section-title">
-<h2>Muscle Groups</h2>
-</div>
-
-<div
-class="muscles"
-id="muscles">
-</div>
-
+  <div class="section-title">
+    <h2>Muscle Groups</h2>
+  </div>
+  <div class="muscles" id="muscles"></div>
 </section>
 
-
-<section
-class="section"
-id="exercises">
-
-<div class="section-title">
-
-<h2>Exercise Library</h2>
-
-<button
-class="primary"
-onclick="showAll()">
-All
-</button>
-
-</div>
-
-
-<div class="filters">
-
-<select
-id="equipmentFilter"
-onchange="applyFilters()">
-
-<option value="">
-All Equipment
-</option>
-
-</select>
-
-
-<select
-id="levelFilter"
-onchange="applyFilters()">
-
-<option value="">
-All Levels
-</option>
-
-<option>
-Beginner
-</option>
-
-<option>
-Intermediate
-</option>
-
-</select>
-
-
-<select
-id="sortFilter"
-onchange="applyFilters()">
-
-<option value="default">
-Sort: Default
-</option>
-
-<option value="az">
-Name A–Z
-</option>
-
-<option value="za">
-Name Z–A
-</option>
-
-</select>
-
-</div>
-
-
-<div
-class="exercises"
-id="exerciseList">
-</div>
-
+<section class="section" id="exercises">
+  <div class="section-title">
+    <h2 id="currentCategory">All Exercises</h2>
+    <button onclick="showAll()">Show All</button>
+  </div>
+  <div class="exercises" id="exerciseList"></div>
 </section>
 
-
-<section
-class="section"
-id="workout">
-
-<div class="section-title">
-
-<h2>My Workout</h2>
-
-<button
-class="danger"
-onclick="clearWorkout()">
-Clear
-</button>
-
-</div>
-
-<div
-class="workout-box"
-id="workoutList">
-</div>
-
+<section class="section" id="workout">
+  <div class="section-title">
+    <h2>My Workout Routine</h2>
+    <button onclick="clearWorkout()" style="background:var(--danger); color:white;">Clear</button>
+  </div>
+  <div id="workoutList"></div>
 </section>
-
-
-<section
-class="section"
-id="timer">
-
-<div class="section-title">
-<h2>Rest Timer</h2>
-</div>
-
-<div class="timer">
-
-<div
-class="timer-display"
-id="timerDisplay">
-01:00
-</div>
-
-<div class="timer-controls">
-
-<button
-class="primary"
-onclick="startTimer()">
-Start
-</button>
-
-<button
-class="secondary"
-onclick="pauseTimer()">
-Pause
-</button>
-
-<button
-class="secondary"
-onclick="setTimer(60)">
-60 sec
-</button>
-
-<button
-class="secondary"
-onclick="setTimer(90)">
-90 sec
-</button>
-
-<button
-class="danger"
-onclick="resetTimer()">
-Reset
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section
-class="section"
-id="progress">
-
-<div class="section-title">
-<h2>Progress Tracker</h2>
-</div>
-
-
-<div class="stats">
-
-<div class="stat">
-<strong id="workoutCount">0</strong>
-<small>Exercises in workout</small>
-</div>
-
-<div class="stat">
-<strong id="favoriteCount">0</strong>
-<small>Favorites</small>
-</div>
-
-<div class="stat">
-<strong id="progressCount">0</strong>
-<small>Progress entries</small>
-</div>
-
-</div>
-
-
-<div
-class="workout-box"
-style="margin-top:12px">
-
-<div class="progress-form">
-
-<input
-id="weightInput"
-type="number"
-min="0"
-step="0.1"
-placeholder="Weight (kg)"
->
-
-<input
-id="dateInput"
-type="date"
->
-
-<button
-class="primary"
-onclick="addProgress()">
-Save Progress
-</button>
-
-</div>
-
-<div
-class="progress-list"
-id="progressList">
-</div>
-
-</div>
-
-</section>
-
 </main>
 
-
 <footer>
-
-© 2026 Fitify • Your original exercise & workout companion
-
+© 2026 Fitify • Personal Fitness Companion
 </footer>
 
-
-<div
-class="modal"
-id="infoModal"
-onclick="if(event.target===this)closeModal()">
-
-<div class="modal-card">
-
-<div class="modal-head">
-
-<h2 id="modalTitle">
-Exercise
-</h2>
-
-<button
-class="close"
-onclick="closeModal()">
-×
-</button>
-
-</div>
-
-<p id="modalText"></p>
-
-</div>
-
-</div>
-
-
 <script>
-
 const exercises = [
-
-{
-name:"Bench Press",
-muscle:"Chest",
-equipment:"Barbell",
-level:"Intermediate",
-sets:"3 × 8–12",
-image:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=900&q=80",
-desc:"Press the bar from your chest while keeping your body stable."
-},
-
-{
-name:"Push-Up",
-muscle:"Chest",
-equipment:"Bodyweight",
-level:"Beginner",
-sets:"3 × 8–15",
-image:"push-up-4747.jpg",
-desc:"Keep your body in a straight line and lower your chest with control."
-},
-
-{
-name:"Lat Pulldown",
-muscle:"Back",
-equipment:"Cable",
-level:"Beginner",
-sets:"3 × 8–12",
-image:"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80",
-desc:"Pull the bar toward your upper chest with control."
-},
-
-{
-name:"Barbell Row",
-muscle:"Back",
-equipment:"Barbell",
-level:"Intermediate",
-sets:"3 × 8–12",
-image:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=80",
-desc:"Hinge at the hips and pull the bar toward your torso."
-},
-
-{
-name:"Shoulder Press",
-muscle:"Shoulders",
-equipment:"Dumbbell",
-level:"Intermediate",
-sets:"3 × 8–12",
-image:"https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=900&q=80",
-desc:"Press the dumbbells overhead while maintaining control."
-},
-
-{
-name:"Lateral Raise",
-muscle:"Shoulders",
-equipment:"Dumbbell",
-level:"Beginner",
-sets:"3 × 12–15",
-image:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=80",
-desc:"Raise the dumbbells out to your sides with control."
-},
-
-{
-name:"Biceps Curl",
-muscle:"Biceps",
-equipment:"Dumbbell",
-level:"Beginner",
-sets:"3 × 10–15",
-image:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=900&q=80",
-desc:"Curl the weights while keeping your elbows stable."
-},
-
-{
-name:"Triceps Pushdown",
-muscle:"Triceps",
-equipment:"Cable",
-level:"Beginner",
-sets:"3 × 10–15",
-image:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=900&q=80",
-desc:"Extend your elbows while keeping your upper arms stable."
-},
-
-{
-name:"Goblet Squat",
-muscle:"Legs",
-equipment:"Dumbbell",
-level:"Beginner",
-sets:"3 × 8–12",
-image:"https://images.unsplash.com/photo-1574680178050-55c6a6c96e8f?auto=format&fit=crop&w=900&q=80",
-desc:"Squat with a dumbbell held close to your chest."
-},
-
-{
-name:"Romanian Deadlift",
-muscle:"Legs",
-equipment:"Barbell",
-level:"Intermediate",
-sets:"3 × 8–12",
-image:"https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=900&q=80",
-desc:"Hinge at the hips and keep your back neutral."
-},
-
-{
-name:"Plank",
-muscle:"Abs",
-equipment:"Bodyweight",
-level:"Beginner",
-sets:"3 × 20–60 sec",
-image:"https://images.unsplash.com/photo-1566241142559-40e1dab266c6?auto=format&fit=crop&w=900&q=80",
-desc:"Brace your core and maintain a straight body position."
-},
-
-{
-name:"Calf Raise",
-muscle:"Calves",
-equipment:"Bodyweight",
-level:"Beginner",
-sets:"3 × 12–20",
-image:"https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80",
-desc:"Rise onto your toes slowly and lower with control."
-}
-
+  { name:"Bench Press", muscle:"Chest", equipment:"Barbell", level:"Intermediate", sets:"3 × 8–12", image:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=900&q=80", desc:"Press the bar from your chest while keeping your body stable." },
+  { name:"Push-Up", muscle:"Chest", equipment:"Bodyweight", level:"Beginner", sets:"3 × 8–15", image:"https://images.unsplash.com/photo-1598971639058-fab3c3109a00?auto=format&fit=crop&w=900&q=80", desc:"Keep your body in a straight line and lower your chest with control." },
+  { name:"Incline Dumbbell Press", muscle:"Chest", equipment:"Dumbbell", level:"Intermediate", sets:"3 × 10–12", image:"https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?auto=format&fit=crop&w=900&q=80", desc:"Targets upper chest using an inclined bench." },
+  { name:"Lat Pulldown", muscle:"Back", equipment:"Cable", level:"Beginner", sets:"3 × 8–12", image:"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80", desc:"Pull the bar toward your upper chest with control." },
+  { name:"Barbell Row", muscle:"Back", equipment:"Barbell", level:"Intermediate", sets:"3 × 8–12", image:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=80", desc:"Hinge at the hips and pull the bar toward your torso." },
+  { name:"Shoulder Press", muscle:"Shoulders", equipment:"Dumbbell", level:"Intermediate", sets:"3 × 8–12", image:"https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=900&q=80", desc:"Press the dumbbells overhead while maintaining control." },
+  { name:"Lateral Raise", muscle:"Shoulders", equipment:"Dumbbell", level:"Beginner", sets:"3 × 12–15", image:"https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=900&q=80", desc:"Raise the dumbbells out to your sides with control." },
+  { name:"Biceps Curl", muscle:"Biceps", equipment:"Dumbbell", level:"Beginner", sets:"3 × 10–15", image:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=900&q=80", desc:"Curl the weights while keeping your elbows stable." },
+  { name:"Triceps Pushdown", muscle:"Triceps", equipment:"Cable", level:"Beginner", sets:"3 × 10–15", image:"https://images.unsplash.com/photo-1530822847156-5df6846166b3?auto=format&fit=crop&w=900&q=80", desc:"Extend your elbows while keeping your upper arms stable." },
+  { name:"Goblet Squat", muscle:"Legs", equipment:"Dumbbell", level:"Beginner", sets:"3 × 8–12", image:"https://images.unsplash.com/photo-1574680178050-55c6a6c96e8f?auto=format&fit=crop&w=900&q=80", desc:"Squat with a dumbbell held close to your chest." },
+  { name:"Romanian Deadlift", muscle:"Legs", equipment:"Barbell", level:"Intermediate", sets:"3 × 8–12", image:"https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=900&q=80", desc:"Hinge at the hips and keep your back neutral." },
+  { name:"Plank", muscle:"Abs", equipment:"Bodyweight", level:"Beginner", sets:"3 × 20–60 sec", image:"https://images.unsplash.com/photo-1566241142559-40e1dab266c6?auto=format&fit=crop&w=900&q=80", desc:"Brace your core and maintain a straight body position." },
+  { name:"Calf Raise", muscle:"Calves", equipment:"Bodyweight", level:"Beginner", sets:"3 × 12–20", image:"https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80", desc:"Rise onto your toes slowly and lower with control." }
 ];
 
+let workout = JSON.parse(localStorage.getItem("fitifyWorkout") || "[]");
+let activeGroup = "All";
 
-let workout =
-JSON.parse(
-localStorage.getItem("fitifyWorkout") || "[]"
-);
-
-let favorites =
-JSON.parse(
-localStorage.getItem("fitifyFavorites") || "[]"
-);
-
-let progress =
-JSON.parse(
-localStorage.getItem("fitifyProgress") || "[]"
-);
-
-let activeGroup = "";
-
-const groups =
-[...new Set(
-exercises.map(e => e.muscle)
-)];
-
+const groups = [...new Set(exercises.map(e => e.muscle))];
 
 function renderMuscles(){
-
-document.getElementById("muscles").innerHTML =
-
-groups.map(group => {
-
-const count =
-exercises.filter(
-e => e.muscle === group
-).length;
-
-return `
-
-<div
-class="muscle ${activeGroup === group ? "active" : ""}"
-onclick="filterBy('${group}')">
-
-<b>${group}</b>
-
-<small>
-${count} exercises
-</small>
-
-</div>
-
-`;
-
-}).join("");
-
+  document.getElementById("muscles").innerHTML = groups.map(group => {
+    const count = exercises.filter(e => e.muscle === group).length;
+    const isActive = activeGroup === group ? 'active' : '';
+    return `
+      <div class="muscle ${isActive}" onclick="filterBy('${group}')">
+        <b>${group}</b>
+        <small>${count} exercises</small>
+      </div>
+    `;
+  }).join("");
 }
-
-
-function renderFilters(){
-
-const equipments =
-[...new Set(
-exercises.map(e => e.equipment)
-)];
-
-document.getElementById(
-"equipmentFilter"
-).innerHTML =
-
-'<option value="">All Equipment</option>' +
-
-equipments.map(
-x => `<option>${x}</option>`
-).join("");
-
-}
-
 
 function render(list = exercises){
+  const container = document.getElementById("exerciseList");
+  if(!list.length){
+    container.innerHTML = `<div class="empty">Koi exercise nahi mili.</div>`;
+    return;
+  }
 
-const container =
-document.getElementById(
-"exerciseList"
-);
+  container.innerHTML = list.map((e) => {
+    const originalIndex = exercises.findIndex(ex => ex.name === e.name);
+    return `
+      <article class="exercise">
+        <div class="clickable-area" onclick="openYouTube('${e.name}')" title="Click to watch ${e.name} video on YouTube">
+          <img 
+            class="exercise-image" 
+            src="${e.image}" 
+            alt="${e.name}" 
+            loading="lazy" 
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+          >
+          <div class="image-fallback" style="display:none">${e.name}</div>
+        </div>
 
-if(!list.length){
+        <div class="exercise-body">
+          <div class="clickable-area" onclick="openYouTube('${e.name}')">
+            <h3>${e.name}</h3>
+            <span class="play-badge">▶ Watch Video Guide</span>
+          </div>
 
-container.innerHTML =
-'<div class="empty">No exercises found.</div>';
+          <div class="meta">${e.muscle} • ${e.equipment} • ${e.level}</div>
+          <div class="sets">${e.sets}</div>
+          <div class="desc">${e.desc}</div>
 
-return;
-
+          <div class="actions">
+            <button onclick="addWorkout(${originalIndex})">+ Add Routine</button>
+            <button class="favorite" onclick="favorite('${e.name}')">★ Favorite</button>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
 }
-
-
-container.innerHTML =
-
-list.map(e => {
-
-const original =
-exercises.findIndex(
-x => x.name === e.name
-);
-
-const fav =
-favorites.includes(e.name);
-
-return `
-
-<article class="exercise">
-
-<img
-class="exercise-image"
-src="${e.image}"
-alt="${e.name} exercise"
-loading="lazy"
-onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
->
-
-<div
-class="image-fallback"
-style="display:none">
-
-${e.name}
-
-</div>
-
-
-<div class="exercise-body">
-
-<h3>
-${e.name}
-</h3>
-
-<div class="meta">
-${e.muscle} • ${e.equipment} • ${e.level}
-</div>
-
-<div class="sets">
-${e.sets}
-</div>
-
-<div class="desc">
-${e.desc}
-</div>
-
-
-<div class="actions">
-
-<button
-class="primary"
-onclick="addWorkout(${original})">
-Add
-</button>
-
-
-<button
-class="secondary"
-onclick="toggleFavorite('${e.name}')">
-
-${fav ? "★ Favorited" : "☆ Favorite"}
-
-</button>
-
-
-<button
-class="secondary"
-onclick="showInfo('${e.name}')">
-Details
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-`;
-
-}).join("");
-
-}
-
-
-function applyFilters(){
-
-const q =
-document.getElementById(
-"search"
-).value.toLowerCase().trim();
-
-const equipment =
-document.getElementById(
-"equipmentFilter"
-).value;
-
-const level =
-document.getElementById(
-"levelFilter"
-).value;
-
-
-let list =
-exercises.filter(e =>
-
-(!activeGroup ||
- e.muscle === activeGroup)
-
-&&
-
-(!q ||
-(e.name + " " +
- e.muscle + " " +
- e.equipment + " " +
- e.level)
-.toLowerCase()
-.includes(q))
-
-&&
-
-(!equipment ||
- e.equipment === equipment)
-
-&&
-
-(!level ||
- e.level === level)
-
-);
-
-
-const sort =
-document.getElementById(
-"sortFilter"
-).value;
-
-
-if(sort === "az"){
-
-list.sort(
-(a,b) =>
-a.name.localeCompare(b.name)
-);
-
-}
-
-
-if(sort === "za"){
-
-list.sort(
-(a,b) =>
-b.name.localeCompare(a.name)
-);
-
-}
-
-
-render(list);
-
-}
-
-
-function filterExercises(){
-
-applyFilters();
-
-}
-
 
 function filterBy(group){
-
-activeGroup = group;
-
-renderMuscles();
-
-applyFilters();
-
-document
-.getElementById("exercises")
-.scrollIntoView({
-behavior:"smooth"
-});
-
+  activeGroup = group;
+  renderMuscles();
+  document.getElementById("currentCategory").innerText = group + " Exercises";
+  const result = exercises.filter(e => e.muscle === group);
+  render(result);
+  document.getElementById("exercises").scrollIntoView({ behavior:"smooth" });
 }
 
+function filterExercises(){
+  const q = document.getElementById("search").value.toLowerCase().trim();
+  if(!q){
+    activeGroup = "All";
+    renderMuscles();
+    document.getElementById("currentCategory").innerText = "All Exercises";
+    render(exercises);
+    return;
+  }
+  const result = exercises.filter(e => 
+    e.name.toLowerCase().includes(q) || 
+    e.muscle.toLowerCase().includes(q) || 
+    e.equipment.toLowerCase().includes(q)
+  );
+  render(result);
+}
 
 function showAll(){
-
-activeGroup = "";
-
-document.getElementById(
-"search"
-).value = "";
-
-document.getElementById(
-"equipmentFilter"
-).value = "";
-
-document.getElementById(
-"levelFilter"
-).value = "";
-
-document.getElementById(
-"sortFilter"
-).value = "default";
-
-renderMuscles();
-
-render(exercises);
-
-document
-.getElementById("exercises")
-.scrollIntoView({
-behavior:"smooth"
-});
-
+  activeGroup = "All";
+  renderMuscles();
+  document.getElementById("search").value = "";
+  document.getElementById("currentCategory").innerText = "All Exercises";
+  render(exercises);
+  document.getElementById("exercises").scrollIntoView({ behavior:"smooth" });
 }
 
+function openYouTube(exerciseName){
+  const query = encodeURIComponent(exerciseName + " exercise tutorial form");
+  window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank');
+}
 
 function addWorkout(index){
-
-const name =
-exercises[index].name;
-
-if(!workout.includes(name)){
-
-workout.push(name);
-
-saveWorkout();
-
-renderWorkout();
-
-updateStats();
-
-}else{
-
-alert(
-name +
-" is already in My Workout."
-);
-
+  const exercise = exercises[index];
+  if(!workout.includes(exercise.name)){
+    workout.push(exercise.name);
+    saveWorkout();
+    renderWorkout();
+  } else {
+    alert(exercise.name + " aapke workout list me pehle se shamil hai.");
+  }
 }
-
-}
-
 
 function removeWorkout(name){
-
-workout =
-workout.filter(
-x => x !== name
-);
-
-saveWorkout();
-
-renderWorkout();
-
-updateStats();
-
+  workout = workout.filter(item => item !== name);
+  saveWorkout();
+  renderWorkout();
 }
-
 
 function clearWorkout(){
-
-if(!workout.length){
-return;
+  workout = [];
+  saveWorkout();
+  renderWorkout();
 }
-
-if(
-confirm(
-"Clear your workout?"
-)
-){
-
-workout = [];
-
-saveWorkout();
-
-renderWorkout();
-
-updateStats();
-
-}
-
-}
-
 
 function saveWorkout(){
-
-localStorage.setItem(
-"fitifyWorkout",
-JSON.stringify(workout)
-);
-
+  localStorage.setItem("fitifyWorkout", JSON.stringify(workout));
 }
-
 
 function renderWorkout(){
+  const box = document.getElementById("workoutList");
+  if(!workout.length){
+    box.innerHTML = `<div class="empty">Aapka workout list khaali hai. Library se exercises add karein.</div>`;
+    return;
+  }
 
-const box =
-document.getElementById(
-"workoutList"
-);
-
-
-if(!workout.length){
-
-box.innerHTML =
-`
-<div class="empty">
-Your workout is empty.
-Add exercises from the library.
-</div>
-`;
-
-return;
-
+  box.innerHTML = workout.map(name => {
+    const ex = exercises.find(e => e.name === name);
+    return `
+      <div class="workout-item">
+        <div>
+          <b>${name}</b><br>
+          <small>${ex ? ex.muscle + " • " + ex.sets : ""}</small>
+        </div>
+        <button onclick="removeWorkout('${name}')" style="background:var(--danger);color:white">Remove</button>
+      </div>
+    `;
+  }).join("");
 }
 
-
-box.innerHTML =
-
-workout.map(name => {
-
-const ex =
-exercises.find(
-e => e.name === name
-);
-
-return `
-
-<div class="workout-item">
-
-<div>
-
-<b>
-${name}
-</b>
-
-<br>
-
-<small>
-${ex ?
-ex.muscle +
-" • " +
-ex.sets :
-""}
-</small>
-
-</div>
-
-
-<button
-class="danger"
-onclick="removeWorkout('${name}')">
-
-Remove
-
-</button>
-
-</div>
-
-`;
-
-}).join("");
-
+function favorite(name){
+  alert(name + " saved as favorite!");
 }
 
-
-function toggleFavorite(name){
-
-if(
-favorites.includes(name)
-){
-
-favorites =
-favorites.filter(
-x => x !== name
-);
-
-}else{
-
-favorites.push(name);
-
-}
-
-
-localStorage.setItem(
-"fitifyFavorites",
-JSON.stringify(favorites)
-);
-
-applyFilters();
-
-updateStats();
-
-}
-
-
-function showInfo(name){
-
-const e =
-exercises.find(
-x => x.name === name
-);
-
-if(!e){
-return;
-}
-
-
-document.getElementById(
-"modalTitle"
-).textContent =
-e.name;
-
-
-document.getElementById(
-"modalText"
-).textContent =
-
-`${e.muscle} • ${e.equipment} • ${e.level}. Recommended: ${e.sets}. ${e.desc}`;
-
-
-document.getElementById(
-"infoModal"
-).classList.add("show");
-
-}
-
-
-function closeModal(){
-
-document.getElementById(
-"infoModal"
-).classList.remove("show");
-
-}
-
-
-/* REST TIMER */
-
-let timer = 60;
-
-let timerInterval = null;
-
-
-function setTimer(seconds){
-
-pauseTimer();
-
-timer = seconds;
-
-updateTimer();
-
-}
-
-
-function updateTimer(){
-
-const minutes =
-String(
-Math.floor(timer / 60)
-).padStart(2,"0");
-
-const seconds =
-String(
-timer % 60
-).padStart(2,"0");
-
-
-document.getElementById(
-"timerDisplay"
-).textContent =
-`${minutes}:${seconds}`;
-
-}
-
-
-function startTimer(){
-
-if(timerInterval){
-return;
-}
-
-
-timerInterval =
-setInterval(() => {
-
-if(timer > 0){
-
-timer--;
-
-updateTimer();
-
-}else{
-
-pauseTimer();
-
-alert(
-"Rest time finished!"
-);
-
-}
-
-},1000);
-
-}
-
-
-function pauseTimer(){
-
-clearInterval(
-timerInterval
-);
-
-timerInterval = null;
-
-}
-
-
-function resetTimer(){
-
-pauseTimer();
-
-timer = 60;
-
-updateTimer();
-
-}
-
-
-/*
+renderMuscles();
+render();
+renderWorkout();
+</script>
+</body>
+</html>
