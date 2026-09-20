@@ -3,13 +3,16 @@
   "short_name": "Fitify",
   "start_url": "https://mithunsharma01-cmyk.github.io/Fitify/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#000000",
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "https://mithunsharma01-cmyk.github.io/Fitify/pushup~4747.jpg",
-      "sizes": "512x512",
-      "type": "image/jpeg"
+      "src": "https://mithunsharma01-cmyk.github.io/Fitify/20260920_214125.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png"
     }
-  ]
+  ],
+  "id": "index.html",
+  "description": "Fitify - Daily Workout and Fitness Tracker App",
+  "lang": "en"
 }
