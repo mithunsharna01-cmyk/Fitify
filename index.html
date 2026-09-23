@@ -435,6 +435,7 @@ footer{
 
 <script>
 const exercises = [
+  // --- CHEST (5 Workouts) ---
   { 
     name:"Bench Press", 
     muscle:"Chest", 
@@ -443,6 +444,15 @@ const exercises = [
     sets:"3 × 8–12", 
     image:"https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80", 
     desc:"Press the bar from your chest while keeping your core braced and feet flat." 
+  },
+  { 
+    name:"Incline Dumbbell Press", 
+    muscle:"Chest", 
+    equipment:"Dumbbell", 
+    level:"Intermediate", 
+    sets:"3 × 10–12", 
+    image:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80", 
+    desc:"Targets upper chest using an inclined bench press." 
   },
   { 
     name:"Push-Up", 
@@ -454,14 +464,25 @@ const exercises = [
     desc:"Keep your body in a straight line and lower your chest close to the floor." 
   },
   { 
-    name:"Incline Dumbbell Press", 
+    name:"Chest Fly", 
     muscle:"Chest", 
     equipment:"Dumbbell", 
-    level:"Intermediate", 
-    sets:"3 × 10–12", 
-    image:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80", 
-    desc:"Targets upper chest using an inclined bench press." 
+    level:"Beginner", 
+    sets:"3 × 12–15", 
+    image:"https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?auto=format&fit=crop&w=800&q=80", 
+    desc:"Lie back and bring dumbbells together in an arcing motion to isolate chest muscles." 
   },
+  { 
+    name:"Cable Crossover", 
+    muscle:"Chest", 
+    equipment:"Cable", 
+    level:"Intermediate", 
+    sets:"3 × 12–15", 
+    image:"https://images.unsplash.com/photo-1574680178050-55c6a6c96e8f?auto=format&fit=crop&w=800&q=80", 
+    desc:"Pull cables down and across your body to squeeze the inner chest." 
+  },
+
+  // --- BACK (5 Workouts) ---
   { 
     name:"Lat Pulldown", 
     muscle:"Back", 
@@ -481,6 +502,35 @@ const exercises = [
     desc:"Hinge at the hips with a flat back and pull the barbell toward your belly." 
   },
   { 
+    name:"Pull-Ups", 
+    muscle:"Back", 
+    equipment:"Bodyweight", 
+    level:"Advanced", 
+    sets:"3 × Max", 
+    image:"https://images.unsplash.com/photo-1598971639058-fab3c3109a00?auto=format&fit=crop&w=800&q=80", 
+    desc:"Grasp the overhead bar and pull your chest up until your chin clears the bar." 
+  },
+  { 
+    name:"Seated Cable Row", 
+    muscle:"Back", 
+    equipment:"Cable", 
+    level:"Beginner", 
+    sets:"3 × 10–12", 
+    image:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=800&q=80", 
+    desc:"Pull handles to your lower stomach keeping your chest tall and shoulders back." 
+  },
+  { 
+    name:"Single-Arm Dumbbell Row", 
+    muscle:"Back", 
+    equipment:"Dumbbell", 
+    level:"Beginner", 
+    sets:"3 × 10–12", 
+    image:"https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80", 
+    desc:"Support knee on a bench and pull the dumbbell straight up to your hip." 
+  },
+
+  // --- SHOULDERS (5 Workouts) ---
+  { 
     name:"Shoulder Press", 
     muscle:"Shoulders", 
     equipment:"Dumbbell", 
@@ -499,6 +549,35 @@ const exercises = [
     desc:"Raise dumbbells out to your sides until shoulder height with control." 
   },
   { 
+    name:"Front Raise", 
+    muscle:"Shoulders", 
+    equipment:"Dumbbell", 
+    level:"Beginner", 
+    sets:"3 × 12–15", 
+    image:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80", 
+    desc:"Lift weights directly in front of you up to eye level using front delts." 
+  },
+  { 
+    name:"Face Pull", 
+    muscle:"Shoulders", 
+    equipment:"Cable", 
+    level:"Intermediate", 
+    sets:"3 × 12–15", 
+    image:"https://images.unsplash.com/photo-1530822847156-5df6846166b3?auto=format&fit=crop&w=800&q=80", 
+    desc:"Pull cable rope towards your face, pulling hands apart for rear delts and posture." 
+  },
+  { 
+    name:"Arnold Press", 
+    muscle:"Shoulders", 
+    equipment:"Dumbbell", 
+    level:"Intermediate", 
+    sets:"3 × 10–12", 
+    image:"https://images.unsplash.com/photo-1574680178050-55c6a6c96e8f?auto=format&fit=crop&w=800&q=80", 
+    desc:"Start with palms facing you and rotate wrists outward as you press overhead." 
+  },
+
+  // --- BICEPS (5 Workouts) ---
+  { 
     name:"Biceps Curl", 
     muscle:"Biceps", 
     equipment:"Dumbbell", 
@@ -507,6 +586,44 @@ const exercises = [
     image:"https://images.unsplash.com/photo-1581009137042-c552e485697a?auto=format&fit=crop&w=800&q=80", 
     desc:"Curl weights toward your shoulders keeping elbows pinned to your sides." 
   },
+  { 
+    name:"Hammer Curl", 
+    muscle:"Biceps", 
+    equipment:"Dumbbell", 
+    level:"Beginner", 
+    sets:"3 × 10–12", 
+    image:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=800&q=80", 
+    desc:"Keep palms facing each other throughout the curl to target forearm & brachialis." 
+  },
+  { 
+    name:"Barbell Curl", 
+    muscle:"Biceps", 
+    equipment:"Barbell", 
+    level:"Intermediate", 
+    sets:"3 × 8–12", 
+    image:"https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?auto=format&fit=crop&w=800&q=80", 
+    desc:"Lift barbell using underhand grip without swinging your hips or shoulders." 
+  },
+  { 
+    name:"Preacher Curl", 
+    muscle:"Biceps", 
+    equipment:"EZ Bar / Dumbbell", 
+    level:"Intermediate", 
+    sets:"3 × 10–12", 
+    image:"https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80", 
+    desc:"Rest arms on a preacher bench to eliminate momentum and isolate the biceps." 
+  },
+  { 
+    name:"Concentration Curl", 
+    muscle:"Biceps", 
+    equipment:"Dumbbell", 
+    level:"Beginner", 
+    sets:"3 × 12–15", 
+    image:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80", 
+    desc:"Rest elbow against inner thigh and curl slowly for maximum contraction." 
+  },
+
+  // --- TRICEPS (5 Workouts) ---
   { 
     name:"Triceps Pushdown", 
     muscle:"Triceps", 
@@ -517,23 +634,43 @@ const exercises = [
     desc:"Push cable attachment down fully extending your arms and squeezing triceps." 
   },
   { 
-    name:"Goblet Squat", 
-    muscle:"Legs", 
-    equipment:"Dumbbell", 
-    level:"Beginner", 
-    sets:"3 × 8–12", 
-    image:"https://images.unsplash.com/photo-1574680178050-55c6a6c96e8f?auto=format&fit=crop&w=800&q=80", 
-    desc:"Hold a dumbbell vertically at chest height and squat deep with knees out." 
+    name:"Skull Crushers", 
+    muscle:"Triceps", 
+    equipment:"Barbell / EZ Bar", 
+    level:"Intermediate", 
+    sets:"3 × 10–12", 
+    image:"https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80", 
+    desc:"Lie back and lower bar towards your forehead, bending only at elbows." 
   },
   { 
-    name:"Romanian Deadlift", 
-    muscle:"Legs", 
-    equipment:"Barbell", 
+    name:"Overhead Dumbbell Extension", 
+    muscle:"Triceps", 
+    equipment:"Dumbbell", 
+    level:"Beginner", 
+    sets:"3 × 10–12", 
+    image:"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1a?auto=format&fit=crop&w=800&q=80", 
+    desc:"Hold a dumbbell overhead with both hands and lower behind head." 
+  },
+  { 
+    name:"Triceps Dips", 
+    muscle:"Triceps", 
+    equipment:"Bodyweight", 
     level:"Intermediate", 
     sets:"3 × 8–12", 
-    image:"https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=800&q=80", 
-    desc:"Lower the weight by hinging hips back, feeling a stretch in your hamstrings." 
+    image:"https://images.unsplash.com/photo-1598971639058-fab3c3109a00?auto=format&fit=crop&w=800&q=80", 
+    desc:"Lower body on parallel bars until arms form a 90-degree angle, then press up." 
   },
+  { 
+    name:"Tricep Kickbacks", 
+    muscle:"Triceps", 
+    equipment:"Dumbbell", 
+    level:"Beginner", 
+    sets:"3 × 12–15", 
+    image:"https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80", 
+    desc:"Hinge forward, pin elbow to side, and extend dumbbell back until arm is straight." 
+  },
+
+  // --- ABS (5 Workouts) ---
   { 
     name:"Plank", 
     muscle:"Abs", 
@@ -544,13 +681,87 @@ const exercises = [
     desc:"Maintain a strict push-up or forearm plank position, squeezing core." 
   },
   { 
-    name:"Calf Raise", 
-    muscle:"Calves", 
+    name:"Crunches", 
+    muscle:"Abs", 
     equipment:"Bodyweight", 
+    level:"Beginner", 
+    sets:"3 × 15–20", 
+    image:"https://images.unsplash.com/photo-1598971639058-fab3c3109a00?auto=format&fit=crop&w=800&q=80", 
+    desc:"Lie flat with knees bent, flex abs to lift shoulders off the floor." 
+  },
+  { 
+    name:"Hanging Leg Raise", 
+    muscle:"Abs", 
+    equipment:"Bodyweight", 
+    level:"Intermediate", 
+    sets:"3 × 10–15", 
+    image:"https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=800&q=80", 
+    desc:"Hang from a pull-up bar and raise legs up to hip level using abs." 
+  },
+  { 
+    name:"Russian Twists", 
+    muscle:"Abs", 
+    equipment:"Bodyweight", 
+    level:"Beginner", 
+    sets:"3 × 15–20 per side", 
+    image:"https://images.unsplash.com/photo-1566241142559-40e1dab266c6?auto=format&fit=crop&w=800&q=80", 
+    desc:"Sit on floor, lean back slightly, and twist torso side to side for obliques." 
+  },
+  { 
+    name:"Mountain Climbers", 
+    muscle:"Abs", 
+    equipment:"Bodyweight", 
+    level:"Beginner", 
+    sets:"3 × 30–45 sec", 
+    image:"https://images.unsplash.com/photo-1598971639058-fab3c3109a00?auto=format&fit=crop&w=800&q=80", 
+    desc:"From a plank position, drive knees rapidly towards your chest in alternating motion." 
+  },
+
+  // --- CALVES (5 Workouts) ---
+  { 
+    name:"Standing Calf Raise", 
+    muscle:"Calves", 
+    equipment:"Bodyweight / Machine", 
     level:"Beginner", 
     sets:"3 × 12–20", 
     image:"https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80", 
     desc:"Rise high onto the balls of your feet slowly and control the downward path." 
+  },
+  { 
+    name:"Seated Calf Raise", 
+    muscle:"Calves", 
+    equipment:"Machine / Dumbbell", 
+    level:"Beginner", 
+    sets:"3 × 15–20", 
+    image:"https://images.unsplash.com/photo-1574680178050-55c6a6c96e8f?auto=format&fit=crop&w=800&q=80", 
+    desc:"Sit with weight on knees, lift heels as high as possible to target soleus." 
+  },
+  { 
+    name:"Single-Leg Calf Raise", 
+    muscle:"Calves", 
+    equipment:"Bodyweight", 
+    level:"Beginner", 
+    sets:"3 × 12–15 per leg", 
+    image:"https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80", 
+    desc:"Perform calf raises on one leg at a time to correct muscle imbalances." 
+  },
+  { 
+    name:"Donkey Calf Raise", 
+    muscle:"Calves", 
+    equipment:"Machine / Bodyweight", 
+    level:"Intermediate", 
+    sets:"3 × 12–15", 
+    image:"https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=800&q=80", 
+    desc:"Bend forward at hips and extend heels upward for deep calf stretch." 
+  },
+  { 
+    name:"Leg Press Calf Raise", 
+    muscle:"Calves", 
+    equipment:"Machine", 
+    level:"Intermediate", 
+    sets:"3 × 12–15", 
+    image:"https://images.unsplash.com/photo-1574680178050-55c6a6c96e8f?auto=format&fit=crop&w=800&q=80", 
+    desc:"Place toes on edge of leg press platform and extend ankles under load." 
   }
 ];
 
